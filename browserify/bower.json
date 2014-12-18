@@ -8,7 +8,7 @@
   "description": "Example for gulp-usemin.",
   "keywords": [
     "example",
-    "gulp-usemin"
+    "Browserify"
   ],
   "license": "MIT",
   "ignore": [
