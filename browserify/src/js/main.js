@@ -1,14 +1,10 @@
 
-$ = require( 'jquery' );
+var $    = require( 'jquery' );
+var test = require( './test.js' );
+
 
 $( '.l-content' )
     .append( $( '<div>' )
         .text( 'This page is ' + document.title )
     )
-    .append( $( '<div>' )
-        .addClass( 'button' )
-        .text( 'Test' )
-        .on( 'click', function() {
-            alert( 'test' );
-        } )
-    );
+    .append( test( 'test' ) );
