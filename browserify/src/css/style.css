@@ -1,0 +1,38 @@
+
+html, body {
+  background-image: url( "../img/background.png" );
+}
+
+.l-page-header {
+  content: #fff;
+  padding: 1em .5em;
+  text-align: center;
+}
+
+.logo {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  margin: 0 1em 0 0;
+}
+
+.l-page-header .title {
+  display: inline-block;
+  margin: 0;
+  font-size: 3em;
+  font-weight: normal;
+}
+
+.l-content {
+  text-align: center;
+}
+
+.l-content .button {
+  background-color: #3498db;
+  color: #fff;
+  margin: 2em auto;
+  padding: .5em;
+  width: 10em;
+  border-radius: .2em;
+  border-bottom: solid .2em #2980b9;
+}
