@@ -8,7 +8,8 @@ var gulp = require( 'gulp' );
  */
 gulp.task( 'clean', function( cb ) {
     var del = require( 'del' );
-    del( [ './dist' ], cb );
+    del( [ './dist' ] );
+    cb();
 } );
 
 /**
@@ -18,7 +19,7 @@ gulp.task( 'build', function() {
     var browserify = require( 'browserify' );
     var source     = require( 'vinyl-source-stream' );
 
-    browserify( './src/js/main.js' )
+    return browserify( './src/js/main.js' )
         .bundle()
         .pipe( source( 'app.js' ) )
         .pipe( gulp.dest( './src/js' ));
