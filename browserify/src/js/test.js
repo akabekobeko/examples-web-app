@@ -1,4 +1,11 @@
 
+/**
+ * メッセージ表示ボタンを生成します。
+ *
+ * @param {String} message メッセージ。
+ *
+ * @return {Object} ボタンとなる jQuery オブジェクト。
+ */
 module.exports = function( message ) {
     var $ = require( 'jquery' );
 

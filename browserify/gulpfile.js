@@ -8,7 +8,8 @@ var gulp = require( 'gulp' );
  */
 gulp.task( 'clean', function( cb ) {
     var del = require( 'del' );
-    del( [ './dist' ], cb );
+    del( [ './dist' ] );
+    cb();
 } );
 
 /**
@@ -17,27 +18,33 @@ gulp.task( 'clean', function( cb ) {
 gulp.task( 'build', function() {
     var browserify = require( 'browserify' );
     var source     = require( 'vinyl-source-stream' );
+    var buffer     = require( 'vinyl-buffer' );
+    var sourcemaps = require( 'gulp-sourcemaps' );
+    var uglify     = require( 'gulp-uglify' );
 
-    browserify( './src/js/main.js' )
+    return browserify( './src/js/main.js', { debug: true } )
         .bundle()
         .pipe( source( 'app.js' ) )
-        .pipe( gulp.dest( './src/js' ));
+        .pipe( buffer() )
+        .pipe( sourcemaps.init( { loadMaps: true } ) )
+        .pipe( uglify() )
+        .pipe( sourcemaps.write( './' ) )
+        .pipe( gulp.dest( './src/js' ) );
 } );
 
 /**
  * ブロジェクトのリリース用イメージを dist フォルダに生成します。
  */
 gulp.task( 'release', [ 'clean', 'build' ], function() {
-    var uglify    = require( 'gulp-uglify' );
     var minifyCSS = require( 'gulp-minify-css' );
     var usemin    = require( 'gulp-usemin' );
 
-    gulp.src( './src/img/**'  ).pipe( gulp.dest( './dist/img'  ) );
+    gulp.src( './src/img/**'    ).pipe( gulp.dest( './dist/img'  ) );
+    gulp.src( './src/js/app.js' ).pipe( gulp.dest( './dist/js'  ) );
 
     gulp.src( './src/*.html' )
         .pipe( usemin( {
-            css: [ minifyCSS() ],
-            js:[ uglify() ]
+            css: [ minifyCSS() ]
         } ) )
         .pipe( gulp.dest( './dist' ) );
 } );
@@ -57,7 +64,7 @@ gulp.task( 'server', [ 'watch' ], function () {
     var serveStatic = require( 'serve-static' );
 
     var app = connect();
-    app.use( serveStatic( __dirname + '/src' ) );
+    app.use( serveStatic( __dirname ) );
     app.listen( 8080 );
 } );
 
