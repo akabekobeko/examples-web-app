@@ -1,0 +1,22 @@
+{
+  "name": "react-explorer",
+  "version": "1.0.0",
+  "homepage": "https://github.com/akabekobeko/examples-web-app",
+  "authors": [
+    "akabeko"
+  ],
+  "description": "Example of the tree view in React.js.",
+  "main": "index.html",
+  "keywords": [
+    "React.js",
+    "Explorer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

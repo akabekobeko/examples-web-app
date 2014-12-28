@@ -1,0 +1,23 @@
+{
+  "name": "react-explorer",
+  "version": "1.0.0",
+  "description": "Example of the tree view in React.js.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app.git"
+  },
+  "keywords": [
+    "React.js",
+    "Explorer"
+  ],
+  "author": "akabeko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akabekobeko/examples-web-app/issues"
+  },
+  "homepage": "https://github.com/akabekobeko/examples-web-app"
+}
