@@ -35,7 +35,7 @@ gulp.task( 'js', function() {
 gulp.task( 'css', function() {
     return gulp.src( 'src/css/*.styl' )
         .pipe( $.sourcemaps.init() )
-        .pipe( $.stylus( { compress: false } ) )
+        .pipe( $.stylus( { compress: true } ) )
         .pipe( $.sourcemaps.write( '.' ) )
         .pipe( gulp.dest( 'src/css' ) );
 } );
@@ -63,7 +63,7 @@ gulp.task( 'copy', [ 'build', 'clean' ], function() {
             [ 'src/fonts/**', 'src/js/app.js' ],
             { base: 'src' }
         )
-        .pipe( gulp.dest( 'release/src' ) );
+        .pipe( gulp.dest( 'dist' ) );
 } );
 
 /**
@@ -73,6 +73,7 @@ gulp.task( 'release', [ 'copy' ], function() {
     var assets = $.useref.assets();
     gulp.src( './src/*.html' )
         .pipe( assets )
+        .pipe( $.if( '*.css', $.minifyCss() ) )
         .pipe( assets.restore() )
         .pipe( $.useref() )
         .pipe( gulp.dest( './dist' ) );
