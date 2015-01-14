@@ -1,0 +1,59 @@
+
+/**
+ * コンテンツ領域。
+ */
+.l-content
+  color #2c3e50
+
+  /**
+   * コンテンツのタイトル。
+   */
+  .title
+    text-align center
+    font-weight normal
+    font-size 2.5em
+
+  /**
+   * ツリー部分。explorer.jsx のターゲット。
+   */
+  .explorer
+    max-width 1024px
+    margin auto
+
+    /**
+     * フォルダ内のツリー。
+     */
+    ul
+      margin 0
+      padding 0 0 0 2em
+      list-style none
+
+    /**
+     * フォルダ内ツリーのアイテム。
+     */
+    li
+      padding .2em 0
+
+    /**
+     * ツリー内のアイコン。
+     */
+    [class^="icon-"], [class*=" icon-"]
+      margin-right .2em
+
+    /**
+     * フォルダの展開状態アイコン。
+     */
+    .icon-arrow-right, .icon-arrow-down
+      color #95a5a6
+
+    /**
+     * フォルダのアイコン。
+     */
+    .icon-folder
+      color #3498db
+
+    /**
+     * ファイルのアイコン。
+     */
+    .icon-file
+      color #f39c12

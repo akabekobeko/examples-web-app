@@ -9,4 +9,6 @@ Example of the tree view in [React.js](http://facebook.github.io/react/ "React.j
 1. cd react-explorer
 1. npm install
 1. bower install
-1. "gulp build" or "gulp release", this app is outputted
+1. Run "gulp build" or "gulp release"
+ * "gulp build" is dev build ( for src )
+ * "gulp release" is release build ( for dist )
