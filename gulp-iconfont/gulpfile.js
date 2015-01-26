@@ -33,3 +33,8 @@ gulp.task( 'font', function() {
             } )
         .pipe( gulp.dest( 'src/fonts' ) );
 } );
+
+/**
+ * gulp の既定タスクです。
+ */
+gulp.task( 'default', [ 'font' ] );
