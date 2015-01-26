@@ -1,0 +1,26 @@
+{
+  "name": "example-gulp-iconfont",
+  "version": "1.0.0",
+  "description": "Example for gulp-iconfont.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app.git"
+  },
+  "keywords": [
+    "gulp-iconfont"
+  ],
+  "author": "akabeko",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-consolidate": "^0.1.2",
+    "gulp-iconfont": "^1.0.0",
+    "gulp-load-plugins": "^0.8.0",
+    "gulp-rename": "^1.2.0",
+    "lodash": "^2.4.1"
+  }
+}
