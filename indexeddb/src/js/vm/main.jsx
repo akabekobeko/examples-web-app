@@ -96,6 +96,12 @@ var Main = React.createClass( {
             break;
 
         case 'update':
+            this.setState( {
+                current: music,
+                musics:  this.state.musics.map( function( m ) {
+                    return ( m.id === music.id ? music : m );
+                } )
+            } );
             break;
 
         default:

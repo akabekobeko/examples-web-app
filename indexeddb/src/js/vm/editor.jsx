@@ -25,8 +25,12 @@ var Editor = React.createClass( {
      * @return {Object} 初期化された状態オブジェクト。
      */
     getInitialState: function() {
+        var music = createNewMusic();
         return {
-            music: createNewMusic()
+            title:  music.title,
+            artist: music.artist,
+            album:  music.album,
+            genre:  music.genre
         };
     },
 
@@ -37,7 +41,13 @@ var Editor = React.createClass( {
      */
     componentWillReceiveProps: function( nextProps ) {
         if( nextProps.music ) {
-            this.setState( { music: nextProps.music } );
+            this.setState( {
+                id:     nextProps.music.id,
+                title:  nextProps.music.title,
+                artist: nextProps.music.artist,
+                album:  nextProps.music.album,
+                genre:  nextProps.music.genre
+            } );
         }
     },
  
@@ -47,31 +57,34 @@ var Editor = React.createClass( {
      * @return {Object} 描画オブジェクト。
      */
     render: function() {
-        function createRow( name, value, onChange ) {
-            return (
-                <tr>
-                    <th>{name}</th>
-                    <td><input type="text" value={value} onChange={onChange} /></td>
-                </tr>
-            );
-        }
-
         return (
             <div className="editor">
                 <div className="toolbar">
-                    <div className="button add" onClick={this.onUpdate.bind(this, 'add')}>Add</div>
-                    <div className="button delete" onClick={this.onUpdate.bind(this, 'delete')}>Delete</div>
+                    <div className="button add" onClick={this.onUpdate.bind( this, 'add' )}>Add</div>
+                    <div className="button delete" onClick={this.onUpdate.bind( this, 'delete' )}>Delete</div>
                 </div>
                 <table className="form">
                     <tbody>
-                        {createRow( 'Title',  this.state.music.title,  this.onChangeTitle  )}
-                        {createRow( 'Artist', this.state.music.artist, this.onChangeArtist )}
-                        {createRow( 'Album',  this.state.music.album,  this.onChangeAlbum  )}
-                        {createRow( 'Genre',  this.state.music.genre,  this.onChangeGenre  )}
+                        <tr>
+                            <th>Title</th>
+                            <td><input type="text" value={this.state.title} onChange={this.onChangeTitle} /></td>
+                        </tr>
+                        <tr>
+                            <th>Artist</th>
+                            <td><input type="text" value={this.state.artist} onChange={this.onChangeArtist} /></td>
+                        </tr>
+                        <tr>
+                            <th>Album</th>
+                            <td><input type="text" value={this.state.album} onChange={this.onChangeAlbum} /></td>
+                        </tr>
+                        <tr>
+                            <th>Genre</th>
+                            <td><input type="text" value={this.state.genre} onChange={this.onChangeGenre} /></td>
+                        </tr>
                     </tbody>
                 </table>
                 <div className="toolbar">
-                    <div className="button update" onClick={this.onUpdate.bind(this, 'update')}>Update</div>
+                    <div className="button update" onClick={this.onUpdate.bind( this, 'update' )}>Update</div>
                 </div>
             </div>
         );
@@ -89,7 +102,15 @@ var Editor = React.createClass( {
             break;
 
         default:
-            this.props.onUpdate( this.state.music, mode );
+            this.props.onUpdate( {
+                    id:     this.state.id,
+                    title:  this.state.title,
+                    artist: this.state.artist,
+                    album:  this.state.album,
+                    genre:  this.state.genre
+                },
+                mode
+            );
             break;
         }
     },
