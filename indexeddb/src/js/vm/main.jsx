@@ -3,19 +3,6 @@ var List    = require( './list.jsx' );
 var Editor  = require( './editor.jsx' );
 
 /**
- * 新規作成するための音楽情報を生成します。
- * @return {[type]} [description]
- */
-function createMusicForAdditional() {
-    return {
-        title:    'title',
-        artist:   'artist',
-        album:    'album',
-        genre:    'genre'
-    };
-}
-
-/**
  * アプリケーションのエントリーポイントになるコンポーネントです。
  *
  * @type {Object}
@@ -29,7 +16,7 @@ var Main = React.createClass( {
     getInitialState: function() {
         return {
             musics: [],
-            current: createMusicForAdditional(),
+            current: null,
             db: null
         };
     },
@@ -42,8 +29,8 @@ var Main = React.createClass( {
     render: function() {
         return (
             <div className="content">
-                <List musics={this.state.musics} onSelect={this.onSelect} />
-                <Editor music={this.state.current} onSave={this.onSave} />
+                <List musics={this.state.musics} current={this.state.current} onSelect={this.onSelect} />
+                <Editor music={this.state.current} onUpdate={this.onUpdate} />
             </div>
         );
     },
@@ -84,28 +71,32 @@ var Main = React.createClass( {
     count: 0,
 
     /**
-     * 音楽情報が保存される時に発生します。
+     * 音楽情報が更新される時に発生します。
      *
-     * @param  {Object} music 音楽情報。
+     * @param {Object} music 音楽情報。
+     * @param {Object} mode 更新モード。'add'、'delete'、'update' のいずれかとなります。
      */
-    onSave: function( music ) {
-        if( music.id ) {
-            // 更新
-
-        } else {
+    onUpdate: function( music, mode ) {
+        switch( mode ) {
+        case 'add':
             music.id = ++this.count;
-            this.setState( { musics: this.state.musics.concat( [ music ] ) } );
+            this.setState( {
+                current: music,
+                musics:  this.state.musics.concat( [ music ] )
+            } );
+            break;
+
+        case 'delete':
+            break;
+
+
+        case 'update':
+            break;
+
+        default:
+            break;
         }
     },
-
-    /**
-     * 音楽情報が削除される時に発生します。
-     *
-     * @param  {Object} music 音楽情報。
-     */
-    onDelete: function( music ) {
-        if( !( this.state.db ) ) { return; }
-    }
 } );
 
 /**

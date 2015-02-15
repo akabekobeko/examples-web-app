@@ -1,6 +1,19 @@
 var React = require( 'react' );
 
 /**
+ * 新規の音楽情報を生成します。
+ * @return {[type]} [description]
+ */
+function createNewMusic() {
+    return {
+        title:    'title',
+        artist:   'artist',
+        album:    'album',
+        genre:    'genre'
+    };
+}
+
+/**
  * 音楽情報を追加、削除、編集するためのコンポーネントです。
  *
  * @type {Object}
@@ -13,12 +26,19 @@ var Editor = React.createClass( {
      */
     getInitialState: function() {
         return {
-            id:     this.props.music.id,
-            title:  this.props.music.title,
-            artist: this.props.music.artist,
-            album:  this.props.music.album,
-            genre:  this.props.music.genre
+            music: createNewMusic()
         };
+    },
+
+    /**
+     * コンポーネントのプロパティが更新された時に発生します。
+     *
+     * @param  {Object} nextProps 新しいプロパティ。
+     */
+    componentWillReceiveProps: function( nextProps ) {
+        if( nextProps.music ) {
+            this.setState( { music: nextProps.music } );
+        }
     },
  
     /**
@@ -27,54 +47,51 @@ var Editor = React.createClass( {
      * @return {Object} 描画オブジェクト。
      */
     render: function() {
-        var saveButton = this.state.id ? 'Update' : 'Add';
+        function createRow( name, value, onChange ) {
+            return (
+                <tr>
+                    <th>{name}</th>
+                    <td><input type="text" value={value} onChange={onChange} /></td>
+                </tr>
+            );
+        }
+
         return (
             <div className="editor">
                 <div className="toolbar">
-                    <div className="save" onClick={this.onSave}>{saveButton}</div>
-                    <div className="delete" onClick={this.onDelete}>Delete</div>
+                    <div className="button add" onClick={this.onUpdate.bind(this, 'add')}>Add</div>
+                    <div className="button delete" onClick={this.onUpdate.bind(this, 'delete')}>Delete</div>
                 </div>
                 <table className="form">
                     <tbody>
-                        <tr>
-                            <th>Title</th>
-                            <td><input type="text" className="textbox" value={this.state.title} onChange={this.onChangeTitle} /></td>
-                        </tr>
-                        <tr>
-                            <th>Artist</th>
-                            <td><input type="text" className="textbox" value={this.state.artist} onChange={this.onChangeArtist} /></td>
-                        </tr>
-                        <tr>
-                            <th>Album</th>
-                            <td><input type="text" className="textbox" value={this.state.album} onChange={this.onChangeAlbum} /></td>
-                        </tr>
-                        <tr>
-                            <th>Genre</th>
-                            <td><input type="text" className="textbox" value={this.state.genre} onChange={this.onChangeGenre} /></td>
-                        </tr>
-                        </tbody>
+                        {createRow( 'Title',  this.state.music.title,  this.onChangeTitle  )}
+                        {createRow( 'Artist', this.state.music.artist, this.onChangeArtist )}
+                        {createRow( 'Album',  this.state.music.album,  this.onChangeAlbum  )}
+                        {createRow( 'Genre',  this.state.music.genre,  this.onChangeGenre  )}
+                    </tbody>
                 </table>
+                <div className="toolbar">
+                    <div className="button update" onClick={this.onUpdate.bind(this, 'update')}>Update</div>
+                </div>
             </div>
         );
     },
 
     /**
-     * 保存操作がおこなわれた時に発生します。
+     * データが更新された時に発生します。
+     *
+     * @param {Object} mode 更新モード。
      */
-    onSave: function() {
-        var music = {
-            id:     this.props.music.id,
-            title:  this.state.title,
-            artist: this.state.artist,
-            album:  this.state.album,
-            genre:  this.state.genre
-        };
+    onUpdate: function( mode ) {
+        switch( mode ) {
+        case 'add':
+            this.props.onUpdate( createNewMusic(), mode );
+            break;
 
-        this.props.onSave( music );
-    },
-
-    onDelete: function() {
-
+        default:
+            this.props.onUpdate( this.state.music, mode );
+            break;
+        }
     },
 
     /**
@@ -112,7 +129,6 @@ var Editor = React.createClass( {
     onChangeGenre: function( e ) {
         this.setState( { genre: e.target.value } );
     }
-
 } );
 
 module.exports = Editor;

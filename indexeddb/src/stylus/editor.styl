@@ -1,10 +1,12 @@
-color_white      = #fff
-color_gray       = #bdc3c7
-color_gray_light = #ecf0f1
-color_blue       = #2980b9
-color_blue_light = #3498db
-color_red        = #c0392b
-color_red_light  = #e74c3c
+color_white       = #fff
+color_gray        = #bdc3c7
+color_gray_light  = #ecf0f1
+color_green       = #27ae60
+color_green_light = #2ecc71
+color_red         = #c0392b
+color_red_light   = #e74c3c
+color_blue        = #2980b9
+color_blue_light  = #3498db
 
 .editor {
   position absolute
@@ -12,12 +14,13 @@ color_red_light  = #e74c3c
   right 0
   width 30%
   height 100%
+  padding 0 .5em
   overflow scroll
+  background-color color_gray_light
 }
 
 .editor .form {
   width 100%
-  background-color color_gray_light
 
   th {
     padding .5em
@@ -31,8 +34,9 @@ color_red_light  = #e74c3c
   td {
     padding .5em
     border solid 1px color_gray
+    background-color color_white
 
-    .textbox {
+    input[type="text"] {
       box-sizing border-box
       width 100%
       padding .2em
@@ -53,23 +57,33 @@ color_red_light  = #e74c3c
     text-align center
   }
 
-  .save {
-    @extend .editor .toolbar .button
-    background-color color_blue_light
+  .add {
+    background-color color_green_light
+    box-shadow 0 .2em color_green
     color color_white
 
     &:hover {
-      background-color color_blue
+      background-color color_green
     }
   }
 
   .delete {
-    @extend .editor .toolbar .button
     background-color color_red_light
+    box-shadow 0 .2em color_red
     color color_white
 
     &:hover {
       background-color color_red
+    }
+  }
+
+  .update {
+    background-color color_blue_light
+    box-shadow 0 .2em color_blue
+    color color_white
+
+    &:hover {
+      background-color color_blue
     }
   }
 }

@@ -13,8 +13,10 @@ var MusicList = React.createClass( {
      */
     render: function() {
         var items = this.props.musics.map( function( music ) {
+            var selected = ( this.props.current && this.props.current.id === music.id ? 'selected' : null );
             return (
-                <tr key={music.id} onClick={this.onSelect.bind( this, music )}>
+                <tr key={music.id} onClick={this.onSelect.bind( this, music )} className={selected}>
+                    <td>{music.id}</td>
                     <td>{music.title}</td>
                     <td>{music.artist}</td>
                     <td>{music.album}</td>
@@ -28,7 +30,7 @@ var MusicList = React.createClass( {
             <div className="list">
                 <table>
                     <thead>
-                        <tr><th>Title</th><th>Artis</th><th>Album</th><th>Genre</th></tr>
+                        <tr><th>#</th><th>Title</th><th>Artis</th><th>Album</th><th>Genre</th></tr>
                     </thead>
                     <tbody>
                         {items}
