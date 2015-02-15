@@ -18341,6 +18341,7 @@ var Editor = React.createClass( {displayName: "Editor",
             genre:  this.props.music.genre
         };
     },
+ 
     /**
      * コンポーネントの描画オブジェクトを取得します。
      *
@@ -18350,25 +18351,30 @@ var Editor = React.createClass( {displayName: "Editor",
         var saveButton = this.state.id ? 'Update' : 'Add';
         return (
             React.createElement("div", {className: "editor"}, 
-                React.createElement("table", {className: "form"}, 
-                    React.createElement("tr", null, 
-                        React.createElement("th", null, "Title"), 
-                        React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.title, onChange: this.onChangeTitle}))
-                    ), 
-                    React.createElement("tr", null, 
-                        React.createElement("th", null, "Artist"), 
-                        React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.artist, onChange: this.onChangeArtist}))
-                    ), 
-                    React.createElement("tr", null, 
-                        React.createElement("th", null, "Album"), 
-                        React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.album, onChange: this.onChangeAlbum}))
-                    ), 
-                    React.createElement("tr", null, 
-                        React.createElement("th", null, "Genre"), 
-                        React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.genre, onChange: this.onChangeGenre}))
-                    )
+                React.createElement("div", {className: "toolbar"}, 
+                    React.createElement("div", {className: "save", onClick: this.onSave}, saveButton), 
+                    React.createElement("div", {className: "delete", onClick: this.onDelete}, "Delete")
                 ), 
-                React.createElement("div", {className: "save", onClick: this.onSave}, saveButton)
+                React.createElement("table", {className: "form"}, 
+                    React.createElement("tbody", null, 
+                        React.createElement("tr", null, 
+                            React.createElement("th", null, "Title"), 
+                            React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.title, onChange: this.onChangeTitle}))
+                        ), 
+                        React.createElement("tr", null, 
+                            React.createElement("th", null, "Artist"), 
+                            React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.artist, onChange: this.onChangeArtist}))
+                        ), 
+                        React.createElement("tr", null, 
+                            React.createElement("th", null, "Album"), 
+                            React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.album, onChange: this.onChangeAlbum}))
+                        ), 
+                        React.createElement("tr", null, 
+                            React.createElement("th", null, "Genre"), 
+                            React.createElement("td", null, React.createElement("input", {type: "text", className: "textbox", value: this.state.genre, onChange: this.onChangeGenre}))
+                        )
+                        )
+                )
             )
         );
     },
@@ -18386,6 +18392,10 @@ var Editor = React.createClass( {displayName: "Editor",
         };
 
         this.props.onSave( music );
+    },
+
+    onDelete: function() {
+
     },
 
     /**
@@ -18457,12 +18467,14 @@ var MusicList = React.createClass( {displayName: "MusicList",
         }, this );
 
         return (
-            React.createElement("table", {className: "musics"}, 
-                React.createElement("thead", null, 
-                    React.createElement("tr", null, React.createElement("th", null, "Title"), React.createElement("th", null, "Artis"), React.createElement("th", null, "Album"), React.createElement("th", null, "Genre"))
-                ), 
-                React.createElement("tbody", null, 
-                    items
+            React.createElement("div", {className: "list"}, 
+                React.createElement("table", null, 
+                    React.createElement("thead", null, 
+                        React.createElement("tr", null, React.createElement("th", null, "Title"), React.createElement("th", null, "Artis"), React.createElement("th", null, "Album"), React.createElement("th", null, "Genre"))
+                    ), 
+                    React.createElement("tbody", null, 
+                        items
+                    )
                 )
             )
         );
@@ -18527,7 +18539,7 @@ var Main = React.createClass( {displayName: "Main",
      */
     render: function() {
         return (
-            React.createElement("div", {className: "main"}, 
+            React.createElement("div", {className: "content"}, 
                 React.createElement(List, {musics: this.state.musics, onSelect: this.onSelect}), 
                 React.createElement(Editor, {music: this.state.current, onSave: this.onSave})
             )

@@ -1,0 +1,75 @@
+color_white      = #fff
+color_gray       = #bdc3c7
+color_gray_light = #ecf0f1
+color_blue       = #2980b9
+color_blue_light = #3498db
+color_red        = #c0392b
+color_red_light  = #e74c3c
+
+.editor {
+  position absolute
+  top 0
+  right 0
+  width 30%
+  height 100%
+  overflow scroll
+}
+
+.editor .form {
+  width 100%
+  background-color color_gray_light
+
+  th {
+    padding .5em
+    background-color color_gray
+    color color_white
+    font-weight normal
+    text-align right
+    border solid 1px color_gray
+  }
+  
+  td {
+    padding .5em
+    border solid 1px color_gray
+
+    .textbox {
+      box-sizing border-box
+      width 100%
+      padding .2em
+    } 
+  }
+}
+
+.editor .toolbar {
+  margin .5em 0
+  text-align right
+
+  .button {
+    display inline-block
+    margin 0 0 0 .5em
+    padding .5em
+    width 5em
+    border-radius .2em
+    text-align center
+  }
+
+  .save {
+    @extend .editor .toolbar .button
+    background-color color_blue_light
+    color color_white
+
+    &:hover {
+      background-color color_blue
+    }
+  }
+
+  .delete {
+    @extend .editor .toolbar .button
+    background-color color_red_light
+    color color_white
+
+    &:hover {
+      background-color color_red
+    }
+  }
+}

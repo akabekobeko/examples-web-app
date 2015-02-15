@@ -25,14 +25,16 @@ var MusicList = React.createClass( {
         }, this );
 
         return (
-            <table className="musics">
-                <thead>
-                    <tr><th>Title</th><th>Artis</th><th>Album</th><th>Genre</th></tr>
-                </thead>
-                <tbody>
-                    {items}
-                </tbody>
-            </table>
+            <div className="list">
+                <table>
+                    <thead>
+                        <tr><th>Title</th><th>Artis</th><th>Album</th><th>Genre</th></tr>
+                    </thead>
+                    <tbody>
+                        {items}
+                    </tbody>
+                </table>
+            </div>
         );
     },
 

@@ -41,7 +41,7 @@ var Main = React.createClass( {
      */
     render: function() {
         return (
-            <div className="main">
+            <div className="content">
                 <List musics={this.state.musics} onSelect={this.onSelect} />
                 <Editor music={this.state.current} onSave={this.onSave} />
             </div>

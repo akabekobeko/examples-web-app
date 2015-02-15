@@ -20,6 +20,7 @@ var Editor = React.createClass( {
             genre:  this.props.music.genre
         };
     },
+ 
     /**
      * コンポーネントの描画オブジェクトを取得します。
      *
@@ -29,25 +30,30 @@ var Editor = React.createClass( {
         var saveButton = this.state.id ? 'Update' : 'Add';
         return (
             <div className="editor">
+                <div className="toolbar">
+                    <div className="save" onClick={this.onSave}>{saveButton}</div>
+                    <div className="delete" onClick={this.onDelete}>Delete</div>
+                </div>
                 <table className="form">
-                    <tr>
-                        <th>Title</th>
-                        <td><input type="text" className="textbox" value={this.state.title} onChange={this.onChangeTitle} /></td>
-                    </tr>
-                    <tr>
-                        <th>Artist</th>
-                        <td><input type="text" className="textbox" value={this.state.artist} onChange={this.onChangeArtist} /></td>
-                    </tr>
-                    <tr>
-                        <th>Album</th>
-                        <td><input type="text" className="textbox" value={this.state.album} onChange={this.onChangeAlbum} /></td>
-                    </tr>
-                    <tr>
-                        <th>Genre</th>
-                        <td><input type="text" className="textbox" value={this.state.genre} onChange={this.onChangeGenre} /></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>Title</th>
+                            <td><input type="text" className="textbox" value={this.state.title} onChange={this.onChangeTitle} /></td>
+                        </tr>
+                        <tr>
+                            <th>Artist</th>
+                            <td><input type="text" className="textbox" value={this.state.artist} onChange={this.onChangeArtist} /></td>
+                        </tr>
+                        <tr>
+                            <th>Album</th>
+                            <td><input type="text" className="textbox" value={this.state.album} onChange={this.onChangeAlbum} /></td>
+                        </tr>
+                        <tr>
+                            <th>Genre</th>
+                            <td><input type="text" className="textbox" value={this.state.genre} onChange={this.onChangeGenre} /></td>
+                        </tr>
+                        </tbody>
                 </table>
-                <div className="save" onClick={this.onSave}>{saveButton}</div>
             </div>
         );
     },
@@ -65,6 +71,10 @@ var Editor = React.createClass( {
         };
 
         this.props.onSave( music );
+    },
+
+    onDelete: function() {
+
     },
 
     /**
