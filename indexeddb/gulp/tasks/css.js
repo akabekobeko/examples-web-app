@@ -7,11 +7,10 @@ var gulp = require( 'gulp' );
  */
 gulp.task( 'css', function() {
     var $          = require( 'gulp-load-plugins' )();
-    var errorUtil  = require( '../util/error' );
     var config     = require( '../config.js' ).css;
 
     return gulp.src( config.src )
-        .on( 'error', errorUtil )
+        .pipe( $.plumber() )
         .pipe( $.sourcemaps.init() )
         .pipe( $.stylus( { compress: true } ) )
         .pipe( $.sourcemaps.write( '.' ) )
