@@ -61,7 +61,6 @@ var Editor = React.createClass( {
             <div className="editor">
                 <div className="toolbar">
                     <div className="button add" onClick={this.onUpdate.bind( this, 'add' )}>Add</div>
-                    <div className="button delete" onClick={this.onUpdate.bind( this, 'delete' )}>Delete</div>
                 </div>
                 <table className="form">
                     <tbody>
@@ -85,6 +84,7 @@ var Editor = React.createClass( {
                 </table>
                 <div className="toolbar">
                     <div className="button update" onClick={this.onUpdate.bind( this, 'update' )}>Update</div>
+                    <div className="button delete" onClick={this.onUpdate.bind( this, 'delete' )}>Delete</div>
                 </div>
             </div>
         );
