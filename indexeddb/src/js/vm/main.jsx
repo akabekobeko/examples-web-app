@@ -87,8 +87,13 @@ var Main = React.createClass( {
             break;
 
         case 'delete':
+            this.setState( {
+                current: null,
+                musics:  this.state.musics.filter( function( m ) {
+                    return ( m.id !== music.id );
+                } )
+            } );
             break;
-
 
         case 'update':
             break;
