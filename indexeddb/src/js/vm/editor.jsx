@@ -9,9 +9,9 @@ var React = require( 'react' );
  */
 function createMusic( forAdditional ) {
     if( forAdditional ) {
-        return { id: undefined, title: 'title', artist: 'artist', album: 'album',genre: 'genre' };
+        return { title: 'title', artist: 'artist', album: 'album',genre: 'genre' };
     } else {
-        return { id: undefined, title: '', artist: '', album: '',genre: '' };
+        return { title: '', artist: '', album: '',genre: '' };
     }
 }
 
@@ -29,7 +29,6 @@ var Editor = React.createClass( {
     getInitialState: function() {
         var music = createMusic();
         return {
-            id:     music.id, 
             title:  music.title,
             artist: music.artist,
             album:  music.album,
@@ -55,7 +54,6 @@ var Editor = React.createClass( {
         } else {
             var music = createMusic();
             this.setState( {
-                id:     music.id, 
                 title:  music.title,
                 artist: music.artist,
                 album:  music.album,

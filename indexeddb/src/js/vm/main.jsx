@@ -84,16 +84,21 @@ var Main = React.createClass( {
 
         switch( mode ) {
         case 'add':
+        case 'update':
             this.state.db.addItem( music, function( error, newMusic ) {
                 if( error ) {
                     alert( error.message );
                     return;
                 }
 
-                this.setState( {
-                    current: newMusic,
-                    musics:  this.state.musics.concat( [ newMusic ] )
-                } );
+                var musics = ( mode === 'add' ?
+                    this.state.musics.concat( [ newMusic ] ) :
+                    this.state.musics.map( function( m ) {
+                        return ( m.id === newMusic.id ? newMusic : m );
+                    } )
+                );
+
+                this.setState( { current: newMusic, musics: musics } );
 
             }.bind( this ) );
 
@@ -101,6 +106,11 @@ var Main = React.createClass( {
 
         case 'delete':
             this.state.db.deleteItem( music.id, function( error, deletedId ) {
+                if( error ) {
+                    alert( error.message );
+                    return;
+                }
+
                 this.setState( {
                     current: null,
                     musics:  this.state.musics.filter( function( m ) {
@@ -109,15 +119,6 @@ var Main = React.createClass( {
                 } );
             }.bind( this ) );
 
-            break;
-
-        case 'update':
-            this.setState( {
-                current: music,
-                musics:  this.state.musics.map( function( m ) {
-                    return ( m.id === music.id ? music : m );
-                } )
-            } );
             break;
 
         default:

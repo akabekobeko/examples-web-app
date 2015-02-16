@@ -91,20 +91,15 @@ module.exports = function() {
     };
 
     /**
-     * 音楽情報を追加します。
+     * 音楽情報を追加または更新します。
      *
-     * @param {Object}   music    音楽情報。
+     * @param {Object}   music    音楽情報。id が有効値の場合は既存の情報を上書きします。
      * @param {Function} callback 処理が終了した時に呼び出される関数。
      */
     this.addItem = function( music, callback ) {
         var transaction = _db.transaction( DB_STORE_NAME, 'readwrite' );
         var store       = transaction.objectStore( DB_STORE_NAME );
-        var request     = store.put( {
-            title:  music.title,
-            artist: music.artist,
-            album:  music.album,
-            genre:  music.genre
-        } );
+        var request     = store.put( music );
 
         request.onsuccess = function( e ) {
             music.id = e.target.result;
