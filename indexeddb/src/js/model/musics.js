@@ -117,5 +117,25 @@ module.exports = function() {
         };
     };
 
+    /**
+     * 音楽情報を削除します。
+     *
+     * @param {Number}   id       音楽情報の識別子。
+     * @param {Function} callback 処理が終了した時に呼び出される関数。
+     */
+    this.deleteItem = function( id, callback ) {
+        var transaction = _db.transaction( DB_STORE_NAME, 'readwrite' );
+        var store       = transaction.objectStore( DB_STORE_NAME );
+        var request     = store.delete( id );
+
+        request.onsuccess = function( e ) {
+            if( callback ) { callback( null, id ); }
+        };
+     
+        request.onerror = function( e ) {
+            if( callback ) { callback( e, id ); }
+        };
+    };
+
     return this;
 };

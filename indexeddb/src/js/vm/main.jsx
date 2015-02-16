@@ -96,15 +96,19 @@ var Main = React.createClass( {
                 } );
 
             }.bind( this ) );
+
             break;
 
         case 'delete':
-            this.setState( {
-                current: null,
-                musics:  this.state.musics.filter( function( m ) {
-                    return ( m.id !== music.id );
-                } )
-            } );
+            this.state.db.deleteItem( music.id, function( error, deletedId ) {
+                this.setState( {
+                    current: null,
+                    musics:  this.state.musics.filter( function( m ) {
+                        return ( m.id !== deletedId );
+                    } )
+                } );
+            }.bind( this ) );
+
             break;
 
         case 'update':
