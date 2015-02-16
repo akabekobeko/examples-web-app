@@ -1,6 +1,7 @@
 color_white       = #fff
 color_gray        = #bdc3c7
 color_gray_light  = #ecf0f1
+color_gray_dark   = #95a5a6
 color_green       = #27ae60
 color_green_light = #2ecc71
 color_red         = #c0392b
@@ -8,6 +9,9 @@ color_red_light   = #e74c3c
 color_blue        = #2980b9
 color_blue_light  = #3498db
 
+/**
+ * 音楽情報の編集エリア。
+ */
 .editor {
   position absolute
   top 0
@@ -19,6 +23,9 @@ color_blue_light  = #3498db
   background-color color_gray_light
 }
 
+/**
+ * 編集用フォーム。
+ */
 .editor .form {
   width 100%
 
@@ -44,19 +51,32 @@ color_blue_light  = #3498db
   }
 }
 
+/**
+ * ツールバー。
+ */
 .editor .toolbar {
   margin .5em 0
-  text-align right
 
+  /**
+   * ボタンの共通定義。
+   */
   .button {
     display inline-block
-    margin 0 0 0 .5em
     padding .5em
     width 5em
     border-radius .2em
     text-align center
+
+    user-select none
+    -webkit-user-select none
+    -moz-user-select none
+    -ms-user-select none
+    -o-user-select none
   }
 
+  /**
+   * 追加ボタン。
+   */
   .add {
     background-color color_green_light
     box-shadow 0 .2em color_green
@@ -67,7 +87,24 @@ color_blue_light  = #3498db
     }
   }
 
+  /**
+   * 更新ボタン。
+   */
+  .update {
+    background-color color_blue_light
+    box-shadow 0 .2em color_blue
+    color color_white
+
+    &:hover {
+      background-color color_blue
+    }
+  }
+
+  /**
+   * 削除ボタン。
+   */
   .delete {
+    margin 0 0 0 .5em
     background-color color_red_light
     box-shadow 0 .2em color_red
     color color_white
@@ -77,13 +114,19 @@ color_blue_light  = #3498db
     }
   }
 
-  .update {
-    background-color color_blue_light
-    box-shadow 0 .2em color_blue
+  /**
+   * 無効状態のボタン。
+   * add は常に有効で、delete、update のみ状態が切り替わります。
+   * 無効時でも delete の左に余白を空けたいので、この定義でも margin を指定します。
+   */
+  .disable {
+    margin 0 0 0 .5em
+    background-color color_gray
+    box-shadow 0 .2em color_gray_dark
     color color_white
 
     &:hover {
-      background-color color_blue
+      background-color color_gray
     }
   }
 }

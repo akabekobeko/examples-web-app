@@ -7,7 +7,7 @@ var gulp = require( 'gulp' );
  */
 gulp.task( 'clean', function( cb ) {
     var del    = require( 'del' );
-    var config = require( '../config' );
+    var config = require( '../config' ).clean;
 
     del( [ config.dist ], cb );
 } );

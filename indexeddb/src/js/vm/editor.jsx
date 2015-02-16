@@ -1,16 +1,18 @@
 var React = require( 'react' );
 
 /**
- * 新規の音楽情報を生成します。
- * @return {[type]} [description]
+ * 音楽情報を生成します。
+ *
+ * @param {Boolean} forAdditional 新規追加用なら true、それ以外はリセット用。
+ *
+ * @return {Object} 音楽情報。
  */
-function createNewMusic() {
-    return {
-        title:    'title',
-        artist:   'artist',
-        album:    'album',
-        genre:    'genre'
-    };
+function createMusic( forAdditional ) {
+    if( forAdditional ) {
+        return { id: undefined, title: 'title', artist: 'artist', album: 'album',genre: 'genre' };
+    } else {
+        return { id: undefined, title: '', artist: '', album: '',genre: '' };
+    }
 }
 
 /**
@@ -25,8 +27,9 @@ var Editor = React.createClass( {
      * @return {Object} 初期化された状態オブジェクト。
      */
     getInitialState: function() {
-        var music = createNewMusic();
+        var music = createMusic();
         return {
+            id:     music.id, 
             title:  music.title,
             artist: music.artist,
             album:  music.album,
@@ -48,19 +51,39 @@ var Editor = React.createClass( {
                 album:  nextProps.music.album,
                 genre:  nextProps.music.genre
             } );
+
+        } else {
+            var music = createMusic();
+            this.setState( {
+                id:     music.id, 
+                title:  music.title,
+                artist: music.artist,
+                album:  music.album,
+                genre:  music.genre
+            } );
         }
     },
- 
+
     /**
      * コンポーネントの描画オブジェクトを取得します。
      *
      * @return {Object} 描画オブジェクト。
      */
     render: function() {
+        var paramUpdate = ( this.state.id ? { name: 'update', click: this.onUpdate.bind( this, 'update' ) } : { name: 'disable' } );
+        var paramDelete = ( this.state.id ? { name: 'delete', click: this.onUpdate.bind( this, 'delete' ) } : { name: 'disable' } );
+
         return (
             <div className="editor">
                 <div className="toolbar">
-                    <div className="button add" onClick={this.onUpdate.bind( this, 'add' )}>Add</div>
+                    <div className="left">
+                        <div className="button add" onClick={this.onUpdate.bind( this, 'add' )}>Add</div>
+                    </div>
+                    <div className="right">
+                        <div className={'button ' + paramUpdate.name} onClick={paramUpdate.click}>Update</div>
+                        <div className={'button ' + paramDelete.name} onClick={paramDelete.click}>Delete</div>
+                    </div>
+                    <div className="clear"></div>
                 </div>
                 <table className="form">
                     <tbody>
@@ -82,10 +105,6 @@ var Editor = React.createClass( {
                         </tr>
                     </tbody>
                 </table>
-                <div className="toolbar">
-                    <div className="button update" onClick={this.onUpdate.bind( this, 'update' )}>Update</div>
-                    <div className="button delete" onClick={this.onUpdate.bind( this, 'delete' )}>Delete</div>
-                </div>
             </div>
         );
     },
@@ -98,7 +117,7 @@ var Editor = React.createClass( {
     onUpdate: function( mode ) {
         switch( mode ) {
         case 'add':
-            this.props.onUpdate( createNewMusic(), mode );
+            this.props.onUpdate( createMusic( true ), mode );
             break;
 
         default:

@@ -54,6 +54,8 @@ module.exports = function() {
         };
 
         request.onsuccess = function( e ) {
+            console.log( 'db oepn: success' );
+
             _db = e.target.result;
             if( callback ) {
                 callback();
@@ -61,6 +63,8 @@ module.exports = function() {
         };
          
         request.onerror = function( e ) {
+            console.log( e );
+
             if( callback ) {
                 callback( e );
             }
@@ -71,7 +75,10 @@ module.exports = function() {
      * データベースを破棄します。
      */
     function destroy() {
-        _indexedDB.deleteDatabase( DB_NAME );
+        if(  _db ) {
+            _db.close();
+            _indexedDB.deleteDatabase( DB_NAME );
+        }
     }
 
     /**
@@ -80,10 +87,15 @@ module.exports = function() {
      * @param {Object}   music    音楽情報。
      * @param {Function} callback 処理が終了した時に呼び出される関数。
      */
-    function addItem( music, onSuccess, onError ) {
+    function addItem( music, callback ) {
         var transaction = _db.transaction( DB_STORE_NAME, IDBTransaction.READ_WRITE );
         var store       = transaction.objectStore( DB_STORE_NAME );
-        var request     = store.put( music );
+        var request     = store.put( {
+            title:  music.title,
+            artist: music.artist,
+            album:  music.album,
+            genre:  music.genre
+        } );
 
         request.onsuccess = function( e ) {
             if( callback ) {
@@ -94,6 +106,7 @@ module.exports = function() {
         request.onerror = function( e ) {
             if( callback ) {
                 callback( e, music );
+                console.log( e );
             }
         };
     }
