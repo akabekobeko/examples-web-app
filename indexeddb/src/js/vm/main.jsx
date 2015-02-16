@@ -39,24 +39,29 @@ var Main = React.createClass( {
      * すべての音楽情報を読み込みます。
      */
     load: function() {
-        try {
-            this.state.db = require( '../model/musics.js' )();
-            this.state.db.open( function( error ) {
-                if( error ) { throw new Error( 'Failed to open database.' ); }
+        this.state.db = require( '../model/musics.js' )();
+        if( !( this.state.db ) ) {
+            alert( 'IndexedDB not supported.' );
+            return;
+        }
 
-                this.state.db.readAll( function( error, musics ) {
-                    if( error ) { throw new Error( 'Failed to read muisc data.' ); }
+        this.state.db.open( function( error ) {
+            if( error ) {
+                alert( 'Failed to open the database.' );
+                return;
+            }
 
-                    this.setState( { musics: musics } );
+            this.state.db.readAll( function( error, musics ) {
+                if( error ) {
+                    alert( 'Failed to read musics.' );
+                    return;
+                }
 
-                }.bind( this ) );
+                this.setState( { musics: musics } );
 
             }.bind( this ) );
 
-        } catch( e ) {
-            this.setState( { db: null } );
-            alert( e.message );
-        }
+        }.bind( this ) );
     },
 
     /**
@@ -68,8 +73,6 @@ var Main = React.createClass( {
         this.setState( { current: music, editorMode: 'update' } );
     },
 
-    count: 0,
-
     /**
      * 音楽情報が更新される時に発生します。
      *
@@ -77,13 +80,22 @@ var Main = React.createClass( {
      * @param {Object} mode 更新モード。'add'、'delete'、'update' のいずれかとなります。
      */
     onUpdate: function( music, mode ) {
+        if( !( this.state.db ) ) { return; }
+
         switch( mode ) {
         case 'add':
-            music.id = ++this.count;
-            this.setState( {
-                current: music,
-                musics:  this.state.musics.concat( [ music ] )
-            } );
+            this.state.db.addItem( music, function( error, newMusic ) {
+                if( error ) {
+                    alert( error.message );
+                    return;
+                }
+
+                this.setState( {
+                    current: newMusic,
+                    musics:  this.state.musics.concat( [ newMusic ] )
+                } );
+
+            }.bind( this ) );
             break;
 
         case 'delete':
