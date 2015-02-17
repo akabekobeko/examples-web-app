@@ -54,6 +54,7 @@ var Editor = React.createClass( {
         } else {
             var music = createMusic();
             this.setState( {
+                id:     undefined,
                 title:  music.title,
                 artist: music.artist,
                 album:  music.album,
@@ -76,9 +77,9 @@ var Editor = React.createClass( {
                 <div className="toolbar">
                     <div className="left">
                         <div className="button add" onClick={this.onUpdate.bind( this, 'add' )}>Add</div>
+                        <div className={'button ' + paramUpdate.name} onClick={paramUpdate.click}>Update</div>
                     </div>
                     <div className="right">
-                        <div className={'button ' + paramUpdate.name} onClick={paramUpdate.click}>Update</div>
                         <div className={'button ' + paramDelete.name} onClick={paramDelete.click}>Delete</div>
                     </div>
                     <div className="clear"></div>
@@ -103,6 +104,10 @@ var Editor = React.createClass( {
                         </tr>
                     </tbody>
                 </table>
+                <div className="toolbar">
+                    <div className="button clear"   onClick={this.onUpdate.bind( this, 'clear'   )}>Clear</div>
+                    <div className="button dispose" onClick={this.onUpdate.bind( this, 'dispose' )}>Dispose</div>
+                </div>
             </div>
         );
     },
@@ -116,6 +121,11 @@ var Editor = React.createClass( {
         switch( mode ) {
         case 'add':
             this.props.onUpdate( createMusic( true ), mode );
+            break;
+
+        case 'clear':
+        case 'dispose':
+            this.props.onUpdate( null, mode );
             break;
 
         default:

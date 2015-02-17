@@ -21,8 +21,7 @@ module.exports = function() {
     // IndexedDB チェック
     var _indexedDB = ( window.indexedDB || window.mozIndexedDB || window.msIndexedDB || window.webkitIndexedDB );
     if( !( _indexedDB ) ) {
-        console.log( 'DB [ chek ]: success' );
-        return null;
+        throw new Error( 'IndexedDB not supported.' );
     }
 
     /**
@@ -34,13 +33,13 @@ module.exports = function() {
     /**
      * データベースを開きます。
      *
-     * @param  {Function} callback 処理が終了した時に呼び出される関数。
+     * @param {Function} callback 処理が終了した時に呼び出される関数。
      */
     this.open = function( callback ) {
         var request = _indexedDB.open( DB_NAME, DB_VERSION );
 
         request.onupgradeneeded = function( e ) {
-            console.log( 'DB [ oepn ]: Success, onUpgradeNeeded' );
+            console.log( 'DB [ oepn ]: Success, Upgrade' );
 
             _db = e.target.result;
             _db.createObjectStore( DB_STORE_NAME, { keyPath: 'id', autoIncrement: true } );
@@ -50,7 +49,7 @@ module.exports = function() {
         };
 
         request.onsuccess = function( e ) {
-            console.log( 'DB [ oepn ]: Success, onSuccess' );
+            console.log( 'DB [ oepn ]: Success' );
 
             _db = e.target.result;
             if( callback ) { callback(); }
@@ -64,12 +63,61 @@ module.exports = function() {
     };
 
     /**
+     * データベースを破棄します。
+     *
+     * @param {Function} callback 処理が終了した時に呼び出される関数。
+     */
+    this.dispose = function( callback ) {
+        if( !( _db ) ) { return; }
+
+        _db.close();
+
+        var request = _indexedDB.deleteDatabase( DB_NAME );
+        request.onsuccess = function( e ) {
+            console.log( 'DB [ dispose ]: Success' );
+
+            _db = null;
+            if( callback ) { callback(); }
+        };
+         
+        request.onerror = function( e ) {
+            console.log( 'DB [ dispose ]: Error, ' + e );
+
+            if( callback ) { callback( e ); }
+        };
+    };
+
+    /**
+     * 音楽情報を全て消去します。
+     *
+     * @param {Function} callback 処理が終了した時に呼び出される関数。
+     */
+    this.clear = function( callback ) {
+        if( !( _db ) ) { return; }
+
+        var transaction = _db.transaction( DB_STORE_NAME, 'readwrite' );
+        var store       = transaction.objectStore( DB_STORE_NAME );
+        var request     = store.clear();
+
+        request.onsuccess = function( e ) {
+            if( callback ) { callback( null ); }
+        };
+     
+        request.onerror = function( e ) {
+            console.log( e );
+            if( callback ) { callback( e ); }
+        };
+    };
+
+    /**
      * 音楽情報を全件、読み取ります。
      *
      * @param {Function} callback 処理が終了した時に呼び出される関数。
      */
     this.readAll = function( callback ) {
-        var transaction = _db.transaction( DB_STORE_NAME, IDBTransaction.READ_ONLY );
+        if( !( _db ) ) { return; }
+
+        var transaction = _db.transaction( DB_STORE_NAME, 'readonly' );
         var store       = transaction.objectStore( DB_STORE_NAME );
         var request     = store.openCursor();
         var musics      = [];
@@ -97,6 +145,8 @@ module.exports = function() {
      * @param {Function} callback 処理が終了した時に呼び出される関数。
      */
     this.addItem = function( music, callback ) {
+        if( !( _db ) ) { return; }
+
         var transaction = _db.transaction( DB_STORE_NAME, 'readwrite' );
         var store       = transaction.objectStore( DB_STORE_NAME );
         var request     = store.put( music );
@@ -119,6 +169,8 @@ module.exports = function() {
      * @param {Function} callback 処理が終了した時に呼び出される関数。
      */
     this.deleteItem = function( id, callback ) {
+        if( !( _db ) ) { return; }
+
         var transaction = _db.transaction( DB_STORE_NAME, 'readwrite' );
         var store       = transaction.objectStore( DB_STORE_NAME );
         var request     = store.delete( id );
@@ -131,6 +183,4 @@ module.exports = function() {
             if( callback ) { callback( e, id ); }
         };
     };
-
-    return this;
 };

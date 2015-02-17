@@ -39,9 +39,13 @@ var Main = React.createClass( {
      * すべての音楽情報を読み込みます。
      */
     load: function() {
-        this.state.db = require( '../model/musics.js' )();
-        if( !( this.state.db ) ) {
-            alert( 'IndexedDB not supported.' );
+        try {
+            var MusicStore = require( '../model/music-store.js' );
+            this.state.db = new MusicStore();
+
+        } catch( exp ) {
+            this.state.db = null;
+            alert( exp.message );
             return;
         }
 
@@ -121,10 +125,35 @@ var Main = React.createClass( {
 
             break;
 
+        case 'clear':
+            this.state.db.clear( function( error ) {
+                if( error ) {
+                    alert( error.message );
+                    return;
+                }
+
+                this.setState( { current: null, musics: [] } );
+            }.bind( this ) );
+
+            break;
+
+        case 'dispose':
+            this.state.db.dispose( function( error ) {
+                if( error ) {
+                    alert( error.message );
+                    return;
+                }
+
+                this.load();
+
+            }.bind( this ) );
+
+            break;
+
         default:
             break;
         }
-    },
+    }
 } );
 
 /**

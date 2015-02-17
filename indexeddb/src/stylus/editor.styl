@@ -1,13 +1,17 @@
-color_white       = #fff
-color_gray        = #bdc3c7
-color_gray_light  = #ecf0f1
-color_gray_dark   = #95a5a6
-color_green       = #27ae60
-color_green_light = #2ecc71
-color_red         = #c0392b
-color_red_light   = #e74c3c
-color_blue        = #2980b9
-color_blue_light  = #3498db
+color_white        = #fff
+color_gray         = #bdc3c7
+color_gray_light   = #ecf0f1
+color_gray_dark    = #95a5a6
+color_green        = #27ae60
+color_green_light  = #2ecc71
+color_red          = #c0392b
+color_red_light    = #e74c3c
+color_blue         = #2980b9
+color_blue_light   = #3498db
+color_purple       = #8e44ad
+color_purple_light = #9b59b6
+color_indigo       = #2c3e50
+color_indigo_light = #34495e
 
 /**
  * 音楽情報の編集エリア。
@@ -78,6 +82,7 @@ color_blue_light  = #3498db
    * 追加ボタン。
    */
   .add {
+    margin 0 .5em 0 0
     background-color color_green_light
     box-shadow 0 .2em color_green
     color color_white
@@ -104,7 +109,6 @@ color_blue_light  = #3498db
    * 削除ボタン。
    */
   .delete {
-    margin 0 0 0 .5em
     background-color color_red_light
     box-shadow 0 .2em color_red
     color color_white
@@ -116,17 +120,41 @@ color_blue_light  = #3498db
 
   /**
    * 無効状態のボタン。
-   * add は常に有効で、delete、update のみ状態が切り替わります。
-   * 無効時でも delete の左に余白を空けたいので、この定義でも margin を指定します。
    */
   .disable {
-    margin 0 0 0 .5em
     background-color color_gray
     box-shadow 0 .2em color_gray_dark
     color color_white
 
     &:hover {
       background-color color_gray
+    }
+  }
+
+  /**
+   * 全件消去ボタン。
+   */
+  .clear {
+    background-color color_purple_light
+    box-shadow 0 .2em color_purple
+    color color_white
+
+    &:hover {
+      background-color color_purple
+    }
+  }
+
+  /**
+   * データベース破棄ボタン。
+   */
+  .dispose {
+    margin 0 0 0 .5em
+    background-color color_indigo_light
+    box-shadow 0 .2em color_indigo
+    color color_white
+
+    &:hover {
+      background-color color_indigo
     }
   }
 }
