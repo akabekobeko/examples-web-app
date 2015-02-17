@@ -13,14 +13,13 @@ gulp.task( 'js', function() {
     var source      = require( 'vinyl-source-stream' );
     var buffer      = require( 'vinyl-buffer' );
 
-    return browserify( config.src, { debug: config.debug, transform: config.transform } )
+    return browserify( config.src, config.browserify )
         .bundle()
         .on( 'error', errorUtil )
-        .pipe( source( config.file ) )
+        .pipe( source( config.bundle ) )
         .pipe( buffer() )
         .pipe( $.sourcemaps.init( { loadMaps: true } ) )
         //.pipe( $.uglify() )
         .pipe( $.sourcemaps.write( './' ) )
         .pipe( gulp.dest( config.dest ) );
 } );
-

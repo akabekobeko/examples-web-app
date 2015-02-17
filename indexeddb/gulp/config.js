@@ -54,9 +54,11 @@ module.exports = {
     js: {
         src:       './src/js/app.js',
         dest:      './src/js',
-        file:      'bundle.js',
-        debug:     true,
-        transform: [ 'reactify', 'debowerify' ]
+        bundle:    'bundle.js',
+        browserify: {
+            debug:     true,
+            transform: [ 'reactify', 'debowerify' ]
+        }
     },
 
     /**
