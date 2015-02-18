@@ -71,6 +71,16 @@ module.exports = {
     },
 
     /**
+     * ローカル HTTP サーバー起動。
+     * プロジェクトのルートを起点とします。
+     * @type {Object}
+     */
+    connect: {
+        root: require( 'path' ).join( __dirname, '../' ),
+        port: 8080
+    },
+
+    /**
      * ソース変更監視 & 開発用ビルド。
      * @type {Object}
      */

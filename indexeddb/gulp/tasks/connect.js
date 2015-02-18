@@ -6,7 +6,8 @@ var gulp = require( 'gulp' );
 gulp.task( 'connect', function () {
     var app         = require( 'connect' )();
     var serveStatic = require( 'serve-static' );
+    var config      = require( '../config.js' ).connect;
 
-    app.use( serveStatic( __dirname ) );
-    app.listen( 8080 );
+    app.use( serveStatic( config.root ) );
+    app.listen( config.port );
 } );
