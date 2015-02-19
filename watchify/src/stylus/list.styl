@@ -1,0 +1,44 @@
+color_white      = #fff
+color_gray       = #bdc3c7
+color_gray_light = #ecf0f1
+
+/**
+ * 音楽情報の一覧表示エリア。
+ */
+.list {
+  position absolute
+  top 0
+  left 0
+  width 70%
+  height 100%
+  overflow scroll
+}
+
+/**
+ * 音楽情報の一覧。
+ */
+.list table {
+  margin .5em
+  width 95%
+
+  th {
+    padding .5em
+    background-color color_gray
+    color color_white
+    font-weight normal
+    border solid 1px color_gray
+  }
+
+  td {
+    padding .5em
+    border solid 1px color_gray
+    text-align center
+  }
+
+  /**
+   * 選択行。
+   */
+  .selected {
+    background-color color_gray_light
+  }
+}

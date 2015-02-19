@@ -1,0 +1,160 @@
+color_white        = #fff
+color_gray         = #bdc3c7
+color_gray_light   = #ecf0f1
+color_gray_dark    = #95a5a6
+color_green        = #27ae60
+color_green_light  = #2ecc71
+color_red          = #c0392b
+color_red_light    = #e74c3c
+color_blue         = #2980b9
+color_blue_light   = #3498db
+color_purple       = #8e44ad
+color_purple_light = #9b59b6
+color_indigo       = #2c3e50
+color_indigo_light = #34495e
+
+/**
+ * 音楽情報の編集エリア。
+ */
+.editor {
+  position absolute
+  top 0
+  right 0
+  width 30%
+  height 100%
+  padding 0 .5em
+  overflow scroll
+  background-color color_gray_light
+}
+
+/**
+ * 編集用フォーム。
+ */
+.editor .form {
+  width 100%
+
+  th {
+    padding .5em
+    background-color color_gray
+    color color_white
+    font-weight normal
+    text-align right
+    border solid 1px color_gray
+  }
+  
+  td {
+    padding .5em
+    border solid 1px color_gray
+    background-color color_white
+
+    input[type="text"] {
+      box-sizing border-box
+      width 100%
+      padding .2em
+    } 
+  }
+}
+
+/**
+ * ツールバー。
+ */
+.editor .toolbar {
+  margin .5em 0
+
+  /**
+   * ボタンの共通定義。
+   */
+  .button {
+    display inline-block
+    padding .5em
+    width 5em
+    border-radius .2em
+    text-align center
+
+    user-select none
+    -webkit-user-select none
+    -moz-user-select none
+    -ms-user-select none
+    -o-user-select none
+  }
+
+  /**
+   * 追加ボタン。
+   */
+  .add {
+    margin 0 .5em 0 0
+    background-color color_green_light
+    box-shadow 0 .2em color_green
+    color color_white
+
+    &:hover {
+      background-color color_green
+    }
+  }
+
+  /**
+   * 更新ボタン。
+   */
+  .update {
+    background-color color_blue_light
+    box-shadow 0 .2em color_blue
+    color color_white
+
+    &:hover {
+      background-color color_blue
+    }
+  }
+
+  /**
+   * 削除ボタン。
+   */
+  .delete {
+    background-color color_red_light
+    box-shadow 0 .2em color_red
+    color color_white
+
+    &:hover {
+      background-color color_red
+    }
+  }
+
+  /**
+   * 無効状態のボタン。
+   */
+  .disable {
+    background-color color_gray
+    box-shadow 0 .2em color_gray_dark
+    color color_white
+
+    &:hover {
+      background-color color_gray
+    }
+  }
+
+  /**
+   * 全件消去ボタン。
+   */
+  .clear {
+    background-color color_purple_light
+    box-shadow 0 .2em color_purple
+    color color_white
+
+    &:hover {
+      background-color color_purple
+    }
+  }
+
+  /**
+   * データベース破棄ボタン。
+   */
+  .dispose {
+    margin 0 0 0 .5em
+    background-color color_indigo_light
+    box-shadow 0 .2em color_indigo
+    color color_white
+
+    &:hover {
+      background-color color_indigo
+    }
+  }
+}
