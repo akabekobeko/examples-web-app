@@ -58,7 +58,7 @@ module.exports = {
         bundle:    'bundle.js',
         browserify: {
             debug:     true,
-            transform: [ 'reactify' ]
+            transform: [ 'reactify', 'debowerify' ]
         }
     },
 
