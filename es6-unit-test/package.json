@@ -1,0 +1,24 @@
+{
+  "name": "es6-unit-test",
+  "version": "1.0.0",
+  "description": "Sample for unit test in ES6.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:espower-babel/guess test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app"
+  },
+  "keywords": [
+    "ES6",
+    "test"
+  ],
+  "author": "akabeko",
+  "license": "MIT",
+  "devDependencies": {
+    "espower-babel": "^3.1.1",
+    "mocha": "^2.2.5",
+    "power-assert": "^0.11.0"
+  }
+}
