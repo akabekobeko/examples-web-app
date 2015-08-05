@@ -1,6 +1,6 @@
 {
   "name": "front-end-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a starter kit of the Web front-end development.",
   "main": "index.js",
   "scripts": {

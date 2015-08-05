@@ -39,7 +39,7 @@ npm run esdoc
 Build the app for production.
 
 ```bash
-npm release
+npm run release
 ```
 
 ## License
