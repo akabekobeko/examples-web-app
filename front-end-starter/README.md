@@ -18,6 +18,14 @@ Runt the watch files, background complie ( JavaScript/CSS ) and launch the web s
 npm start
 ```
 
+If you want to operate with Windows will fix the **watch:js** of npm-scripts as follows.
+
+```js
+{
+  "watch:js": "watchify -v -t babelify ./src/js/App.js -o ./src/bundle.js -d"
+}
+```
+
 ### Unit test
 
 Run the ES6 code of unit tests by mocha.
