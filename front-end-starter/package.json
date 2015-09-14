@@ -7,9 +7,9 @@
     "test": "mocha --compilers js:espower-babel/guess test/**/*.test.js",
     "start": "npm run watch",
     "esdoc": "esdoc -c esdoc.json",
-    "build:css": "stylus -c ./src/stylus/App.styl -o ./src/bundle.css -m",
+    "build:css": "stylus -c ./src/stylus/App.styl -o ./src/bundle.css -m --sourcemap-root ./stylus",
     "build:js": "browserify -t babelify ./src/js/App.js -d | exorcist ./src/bundle.js.map > ./src/bundle.js",
-    "watch:css": "watch \"npm run build:css\" ./src/stylus/",
+    "watch:css": "stylus -c -w ./src/stylus/App.styl -o ./src/bundle.css -m --sourcemap-root ./stylus",
     "watch:js": "watchify -v -t babelify ./src/js/App.js -o \"exorcist ./src/bundle.js.map > ./src/bundle.js\" -d",
     "watch:server": "browser-sync start --server src",
     "watch": "npm-run-all -p watch:css watch:js watch:server",
@@ -48,7 +48,6 @@
     "stylus": "^0.52.0",
     "trash": "^1.4.1",
     "uglify-js": "^2.4.24",
-    "watch": "^0.16.0",
     "watchify": "^3.3.1"
   }
 }
