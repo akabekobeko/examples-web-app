@@ -1,6 +1,6 @@
 {
   "name": "front-end-starter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This is a starter kit of the Web front-end development.",
   "main": "index.js",
   "scripts": {
@@ -15,11 +15,9 @@
     "watch": "npm-run-all -p watch:css watch:js watch:server",
     "release:css": "stylus -c ./src/stylus/App.styl -o ./dist/bundle.css",
     "release:js": "browserify -t babelify ./src/js/App.js | uglifyjs > ./dist/bundle.js",
-    "release:clean": "trash ./dist",
-    "release:mkdir": "mkdirp ./dist",
-    "release:copyfiles": "copyfiles -f ./src/*.html ./dist",
-    "release:copydirs": "ncp ./src/fonts ./dist/fonts",
-    "release": "npm-run-all -s release:mkdir release:clean release:mkdir  release:copyfiles release:copydirs -p release:css release:js"
+    "release:clean": "rimraf ./dist",
+    "release:copy": "cpx \"./src/**/{*.html,*.eot,*.svg,*.ttf,*.woff,package.json}\" ./dist",
+    "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
   },
   "repository": {
     "type": "git",
@@ -34,19 +32,17 @@
   "license": "MIT",
   "devDependencies": {
     "babelify": "^6.3.0",
-    "browser-sync": "^2.9.3",
+    "browser-sync": "^2.9.6",
     "browserify": "^11.1.0",
-    "copyfiles": "^0.2.1",
-    "esdoc": "^0.2.6",
+    "cpx": "^1.2.1",
+    "esdoc": "^0.3.0",
     "espower-babel": "^3.3.0",
     "exorcist": "^0.4.0",
-    "mkdirp": "^0.5.1",
-    "mocha": "^2.3.2",
-    "ncp": "^2.0.0",
+    "mocha": "^2.3.3",
     "npm-run-all": "^1.2.11",
     "power-assert": "^1.0.1",
+    "rimraf": "^2.4.3",
     "stylus": "^0.52.4",
-    "trash": "^2.0.0",
     "uglify-js": "^2.4.24",
     "watchify": "^3.4.0"
   }

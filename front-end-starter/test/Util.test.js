@@ -2,7 +2,7 @@ import Assert from 'power-assert';
 import Util   from '../src/js/Util.js';
 
 /** @test {Util} */
-describe( 'App', () => {
+describe( 'Util', () => {
   /** @test {Util#formatDate} */
   describe( 'formatDate', () => {
     it( '既定の書式 YYYY-MM-DD hh:mm:ss.SSS', () => {
