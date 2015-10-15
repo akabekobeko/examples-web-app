@@ -32,18 +32,18 @@
   "license": "MIT",
   "devDependencies": {
     "babelify": "^6.3.0",
-    "browser-sync": "^2.9.6",
-    "browserify": "^11.1.0",
+    "browser-sync": "^2.9.11",
+    "browserify": "^11.2.0",
     "cpx": "^1.2.1",
-    "esdoc": "^0.3.0",
+    "esdoc": "^0.4.0",
     "espower-babel": "^3.3.0",
     "exorcist": "^0.4.0",
     "mocha": "^2.3.3",
     "npm-run-all": "^1.2.11",
-    "power-assert": "^1.0.1",
+    "power-assert": "^1.1.0",
     "rimraf": "^2.4.3",
     "stylus": "^0.52.4",
-    "uglify-js": "^2.4.24",
+    "uglify-js": "^2.5.0",
     "watchify": "^3.4.0"
   }
 }
