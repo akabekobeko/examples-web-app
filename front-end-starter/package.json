@@ -8,13 +8,13 @@
     "start": "npm run watch",
     "esdoc": "esdoc -c esdoc.json",
     "build:css": "stylus -c ./src/stylus/App.styl -o ./src/bundle.css -m --sourcemap-root ./stylus",
-    "build:js": "browserify -t babelify ./src/js/App.js -d | exorcist ./src/bundle.js.map > ./src/bundle.js",
+    "build:js": "browserify -t [ babelify --presets [ es2015 react ] ] ./src/js/App.js -d | exorcist ./src/bundle.js.map > ./src/bundle.js",
     "watch:css": "stylus -c -w ./src/stylus/App.styl -o ./src/bundle.css -m --sourcemap-root ./stylus",
-    "watch:js": "watchify -v -t babelify ./src/js/App.js -o \"exorcist ./src/bundle.js.map > ./src/bundle.js\" -d",
+    "watch:js": "watchify -v -t [ babelify --presets [ es2015 react ] ] ./src/js/App.js -o \"exorcist ./src/bundle.js.map > ./src/bundle.js\" -d",
     "watch:server": "browser-sync start --server src",
     "watch": "npm-run-all -p watch:css watch:js watch:server",
     "release:css": "stylus -c ./src/stylus/App.styl -o ./dist/bundle.css",
-    "release:js": "browserify -t babelify ./src/js/App.js | uglifyjs > ./dist/bundle.js",
+    "release:js": "browserify -t [ babelify --presets [ es2015 react ] ] ./src/js/App.js | uglifyjs > ./dist/bundle.js",
     "release:clean": "rimraf ./dist",
     "release:copy": "cpx \"./src/**/{*.html,*.eot,*.svg,*.ttf,*.woff,package.json}\" ./dist",
     "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
@@ -31,19 +31,21 @@
   "author": "akabeko",
   "license": "MIT",
   "devDependencies": {
-    "babelify": "^6.3.0",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babelify": "^7.2.0",
     "browser-sync": "^2.9.11",
-    "browserify": "^11.2.0",
+    "browserify": "^12.0.1",
     "cpx": "^1.2.1",
-    "esdoc": "^0.4.0",
+    "esdoc": "^0.4.3",
     "espower-babel": "^3.3.0",
     "exorcist": "^0.4.0",
     "mocha": "^2.3.3",
-    "npm-run-all": "^1.2.11",
+    "npm-run-all": "^1.2.12",
     "power-assert": "^1.1.0",
     "rimraf": "^2.4.3",
     "stylus": "^0.52.4",
     "uglify-js": "^2.5.0",
-    "watchify": "^3.4.0"
+    "watchify": "^3.6.0"
   }
 }
