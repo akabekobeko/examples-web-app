@@ -13,32 +13,49 @@ export default class Util {
    *
    * @see http://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
    */
-  static formatDate( date, format ) {
-    date   = ( date   === undefined ? new Date()                : date   );
-    format = ( format === undefined ? 'YYYY-MM-DD hh:mm:ss.SSS' : format );
+  static formatDate( date = new Date(), format = 'YYYY-MM-DD hh:mm:ss.SSS' ) {
+    const Y = date.getFullYear();
+    const M = date.getMonth() + 1;
+    const D = date.getDate();
+    const h = date.getHours();
+    const l = ( 12 < h ? h - 12 : h );
+    const m = date.getMinutes();
+    const s = date.getSeconds();
 
-    // Zero padding
-    format = format.replace( /YYYY/g, date.getFullYear() );
-    format = format.replace( /MM/g,   ( '0' + ( date.getMonth() + 1 ) ).slice( -2 ) );
-    format = format.replace( /DD/g,   ( '0' +          date.getDate() ).slice( -2 ) );
-    format = format.replace( /hh/g,   ( '0' +         date.getHours() ).slice( -2 ) );
-    format = format.replace( /mm/g,   ( '0' +       date.getMinutes() ).slice( -2 ) );
-    format = format.replace( /ss/g,   ( '0' +       date.getSeconds() ).slice( -2 ) );
+    let str = format.replace( /YYYY/g, Y );
+    str = str.replace( /MM/g,   ( '0' + M ).slice( -2 ) );
+    str = str.replace( /DD/g,   ( '0' + D ).slice( -2 ) );
+    str = str.replace( /hh/g,   ( '0' + h ).slice( -2 ) );
+    str = str.replace( /mm/g,   ( '0' + m ).slice( -2 ) );
+    str = str.replace( /ss/g,   ( '0' + s ).slice( -2 ) );
 
-    // Single digit
-    format = format.replace( /M/g, date.getMonth() + 1 );
-    format = format.replace( /D/g, date.getDate() );
-    format = format.replace( /h/g, date.getHours() );
-    format = format.replace( /m/g, date.getMinutes() );
-    format = format.replace( /s/g, date.getSeconds() );
+    str = str.replace( /M/g, M );
+    str = str.replace( /D/g, D );
+    str = str.replace( /h/g, h );
+    str = str.replace( /m/g, m );
+    str = str.replace( /s/g, s );
 
-    if( format.match( /S/g ) ) {
-      const milliSeconds = ( '00' + date.getMilliseconds() ).slice( -3 );
-      for( let i = 0, max = format.match( /S/g ).length; i < max; ++i ) {
-        format = format.replace( /S/, milliSeconds.substring( i, i + 1 ) );
+    // 12 Hour
+    str = str.replace( /l/g, l );
+
+    // AM/PM
+    str = str.replace( /p/g, h < 12 ? 'AM' : 'PM' );
+
+    // Month name
+    const monthShortNames = [ '', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+    const monthFullNames  = [ '', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+    str = str.replace( /b/g, monthShortNames[ M ] );
+    str = str.replace( /B/g, monthFullNames[ M ] );
+
+    // milliSeconds
+    if( str.match( /S/g ) ) {
+      const S = date.getMilliseconds();
+      const ms = ( '00' + S ).slice( -3 );
+      for( let i = 0, max = str.match( /S/g ).length; i < max; ++i ) {
+        str = str.replace( /S/, ms.substring( i, i + 1 ) );
       }
     }
 
-    return format;
+    return str;
   }
 }
