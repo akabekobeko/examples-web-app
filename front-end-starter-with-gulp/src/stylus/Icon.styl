@@ -9,7 +9,7 @@
   font-style normal
 }
 
-[class^="icon-"], [class*=" icon-"] {
+icon_style() {
   font-family "icon"
   speak none
   font-style normal
@@ -18,59 +18,81 @@
   text-transform none
   line-height 1
 
-  /* Better Font Rendering =========== */
+  // Better Font Rendering
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
 }
 
+[class^="icon-"], [class*=" icon-"] {
+  icon_style()
+}
+
+icon_down     = "\e600"
+icon_left     = "\e601"
+icon_right    = "\e602"
+icon_up       = "\e603"
+icon_home     = "\e604"
+icon_edit     = "\e605"
+icon_category = "\e606"
+icon_tag      = "\e607"
+icon_clock    = "\e608"
+icon_comment  = "\e609"
+icon_config   = "\e60a"
+icon_web      = "\e60b"
+icon_link     = "\e60e"
+icon_bookmark = "\e60f"
+icon_twitter  = "\e60d"
+icon_feed     = "\e610"
+icon_github   = "\e60c"
+
 .icon-down:before {
-  content "\e600"
+  content icon_down
 }
 .icon-left:before {
-  content "\e601"
+  content icon_left
 }
 .icon-right:before {
-  content "\e602"
+  content icon_right
 }
 .icon-up:before {
-  content "\e603"
+  content icon_up
 }
 .icon-home:before {
-  content "\e604"
+  content icon_home
 }
 .icon-edit:before {
-  content "\e605"
+  content icon_edit
 }
 .icon-category:before {
-  content "\e606"
+  content icon_category
 }
 .icon-tag:before {
-  content "\e607"
+  content icon_tag
 }
 .icon-clock:before {
-  content "\e608"
+  content icon_clock
 }
 .icon-comment:before {
-  content "\e609"
+  content icon_comment
 }
 .icon-config:before {
-  content "\e60a"
+  content icon_config
 }
 .icon-web:before {
-  content "\e60b"
+  content icon_web
 }
 .icon-link:before {
-  content "\e60e"
+  content icon_link
 }
 .icon-bookmark:before {
-  content "\e60f"
+  content icon_bookmark
 }
 .icon-twitter:before {
-  content "\e60d"
+  content icon_twitter
 }
 .icon-feed:before {
-  content "\e610"
+  content icon_feed
 }
 .icon-github:before {
-  content "\e60c"
+  content icon_github
 }

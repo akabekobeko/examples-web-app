@@ -1,4 +1,4 @@
-import Assert from 'power-assert';
+import Assert from 'assert';
 import Util   from '../src/js/Util.js';
 
 /** @test {Util} */
