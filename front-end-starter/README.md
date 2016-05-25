@@ -20,7 +20,7 @@ npm start
 
 ### Unit test
 
-Run the ES6 code of unit tests by mocha.
+Run the unit tests by mocha.
 
 ```bash
 npm test
