@@ -1,14 +1,14 @@
 {
-  "name": "front-end-starter",
-  "version": "1.2.0",
-  "description": "This is a starter kit of the Web front-end development.",
+  "name": "browserify-exports",
+  "version": "1.0.0",
+  "description": "Example for export the library in browserify.",
   "author": "akabeko",
   "license": "MIT",
   "main": "index.js",
   "keywords": [
     "web",
-    "frontend",
-    "starter"
+    "browserify",
+    "export"
   ],
   "repository": {
     "type": "git",
@@ -36,17 +36,20 @@
     "start": "npm run watch",
     "esdoc": "esdoc -c esdoc.json",
     "build:css": "stylus -c --include-css ./src/stylus/App.styl -o ./src/assets/bundle.css -m --sourcemap-base ../stylus",
-    "build:js": "browserify ./src/js/App.js -d | exorcist ./src/assets/bundle.js.map > ./src/assets/bundle.js",
-    "build": "npm-run-all -p build:css build:js",
+    "build:js-lib": "browserify -r ./src/js/lib/Library.js:library -d | exorcist ./src/assets/lib.js.map > ./src/assets/lib.js",
+    "build:js-app": "browserify ./src/js/app/App.js --im -d | exorcist ./src/assets/app.js.map > ./src/assets/app.js",
+    "build": "npm-run-all -p build:css build:js-lib build:js-app",
     "watch:css": "stylus -c -w --include-css ./src/stylus/App.styl -o ./src/assets/bundle.css -m --sourcemap-base ../stylus",
-    "watch:js": "watchify ./src/js/App.js -v -o \"exorcist ./src/assets/bundle.js.map > ./src/assets/bundle.js\" -d",
+    "watch:js-lib": "watchify -r ./src/js/lib/Library.js:library -v -o \"exorcist ./src/assets/lib.js.map > ./src/assets/lib.js\" -d",
+    "watch:js-app": "watchify ./src/js/app/App.js -v --im -o \"exorcist ./src/assets/app.js.map > ./src/assets/app.js\" -d",
     "watch:server": "browser-sync start --server ./ --startPath src/assets/",
-    "watch": "npm-run-all -p watch:css watch:js watch:server",
+    "watch": "npm-run-all -p watch:css watch:js-lib watch:js-app watch:server",
     "release:css": "stylus -c --include-css ./src/stylus/App.styl -o ./dist/bundle.css",
-    "release:js": "cross-env NODE_ENV=production browserify ./src/js/App.js | uglifyjs -c warnings=false -m > ./dist/bundle.js",
+    "release:js-lib": "cross-env NODE_ENV=production browserify -r ./src/js/lib/Library.js:library | uglifyjs -c warnings=false -m > ./dist/lib.js",
+    "release:js-app": "cross-env NODE_ENV=production browserify ./src/js/app/App.js --im | uglifyjs -c warnings=false -m > ./dist/app.js",
     "release:clean": "rimraf ./dist",
     "release:copy": "cpx \"./src/assets/**/{*.html,*.eot,*.svg,*.ttf,*.woff,package.json}\" ./dist",
-    "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
+    "release": "npm-run-all -s release:clean release:copy -p release:css release:js-lib release:js-app"
   },
   "dependencies": {
     "normalize.css": "^4.2.0"
