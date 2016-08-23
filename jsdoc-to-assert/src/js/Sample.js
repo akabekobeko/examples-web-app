@@ -17,6 +17,30 @@ export const func2 = ( message ) => {
 };
 
 /**
+ * Sample object.
+ * @type {Object}
+ */
+export const SampleObj = {
+  /**
+   * Output log.
+   *
+   * @param {String} message Message text.
+   */
+  func: function( message ) {
+    console.log( message );
+  },
+
+  /**
+   * Output log.
+   *
+   * @param {String} message Message text.
+   */
+  func2: ( message ) => {
+    console.log( message );
+  }
+};
+
+/**
  * Sample class.
  */
 export default class Sample {

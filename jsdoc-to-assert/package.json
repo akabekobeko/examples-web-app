@@ -22,9 +22,7 @@
     "env": {
       "development": {
         "presets": [
-          "power-assert"
-        ],
-        "plugins": [
+          "power-assert",
           "jsdoc-to-assert"
         ]
       }
@@ -56,8 +54,8 @@
     "normalize.css": "^4.2.0"
   },
   "devDependencies": {
-    "babel-plugin-jsdoc-to-assert": "^2.1.0",
     "babel-preset-es2015": "^6.13.2",
+    "babel-preset-jsdoc-to-assert": "^3.0.2",
     "babel-preset-power-assert": "^1.0.0",
     "babel-register": "^6.11.6",
     "babelify": "^7.3.0",
