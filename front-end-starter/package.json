@@ -16,7 +16,7 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "latest"
     ],
     "env": {
       "development": {
@@ -26,7 +26,7 @@
       }
     }
   },
-  "browserify" : {
+  "browserify": {
     "transform": [
       "babelify"
     ]
@@ -52,22 +52,22 @@
     "normalize.css": "^4.2.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-latest": "^6.16.0",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.9.0",
+    "babel-register": "^6.16.0",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.13.0",
-    "browserify": "^13.0.1",
-    "cpx": "^1.3.1",
-    "cross-env": "^1.0.8",
-    "esdoc": "^0.4.7",
+    "browser-sync": "^2.16.0",
+    "browserify": "^13.1.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^3.0.0",
+    "esdoc": "^0.4.8",
     "exorcist": "^0.4.0",
-    "mocha": "^2.5.3",
-    "npm-run-all": "^2.3.0",
+    "mocha": "^3.1.0",
+    "npm-run-all": "^3.1.0",
     "power-assert": "^1.4.1",
-    "rimraf": "^2.5.3",
+    "rimraf": "^2.5.4",
     "stylus": "^0.54.5",
-    "uglify-js": "^2.7.0",
+    "uglify-js": "^2.7.3",
     "watchify": "^3.7.0"
   }
 }
