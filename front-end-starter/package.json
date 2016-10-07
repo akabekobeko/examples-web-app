@@ -45,21 +45,21 @@
     "release:css": "stylus -c --include-css ./src/stylus/App.styl -o ./dist/bundle.css",
     "release:js": "cross-env NODE_ENV=production browserify ./src/js/App.js | uglifyjs -c warnings=false -m > ./dist/bundle.js",
     "release:clean": "rimraf ./dist",
-    "release:copy": "cpx \"./src/assets/**/{*.html,*.eot,*.svg,*.ttf,*.woff,package.json}\" ./dist",
+    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.map)\" ./dist",
     "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
   },
   "dependencies": {
-    "normalize.css": "^4.2.0"
+    "normalize.css": "^5.0.0"
   },
   "devDependencies": {
     "babel-preset-latest": "^6.16.0",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.16.0",
+    "babel-register": "^6.16.3",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.16.0",
+    "browser-sync": "^2.17.0",
     "browserify": "^13.1.0",
     "cpx": "^1.5.0",
-    "cross-env": "^3.0.0",
+    "cross-env": "^3.1.1",
     "esdoc": "^0.4.8",
     "exorcist": "^0.4.0",
     "mocha": "^3.1.0",
