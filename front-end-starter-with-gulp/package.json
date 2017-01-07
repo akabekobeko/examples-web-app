@@ -26,44 +26,52 @@
       }
     }
   },
+  "esdoc": {
+    "source": "./src/js",
+    "destination": "./esdoc",
+    "test": {
+      "type": "mocha",
+      "source": "./test"
+    }
+  },
   "scripts": {
     "test": "mocha --compilers js:espower-babel/guess test/**/*.test.js",
     "start": "gulp watch",
-    "esdoc": "esdoc -c esdoc.json",
+    "esdoc": "esdoc",
     "server": "gulp server",
     "build:css": "gulp css",
     "build:js": "gulp js",
     "release": "gulp release"
   },
   "dependencies": {
-    "normalize.css": "^4.2.0"
+    "normalize.css": "^5.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.16.0",
+    "babel-core": "^6.21.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.16.0",
+    "babel-register": "^6.18.0",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.16.0",
-    "browserify": "^13.1.0",
+    "browser-sync": "^2.18.6",
+    "browserify": "^13.3.0",
     "del": "^2.2.2",
-    "esdoc": "^0.4.8",
+    "esdoc": "^0.5.2",
     "gulp": "^3.9.1",
-    "gulp-clean-css": "^2.0.13",
-    "gulp-if": "^2.0.1",
-    "gulp-load-plugins": "^1.3.0",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-if": "^2.0.2",
+    "gulp-load-plugins": "^1.4.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-stylus": "^2.5.0",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
+    "gulp-util": "^3.0.8",
     "gulp-watchify": "^0.6.0",
-    "mocha": "^3.1.0",
-    "power-assert": "^1.4.1",
-    "pretty-hrtime": "^1.0.2",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "pretty-hrtime": "^1.0.3",
     "run-sequence": "^1.2.2",
     "vinyl-buffer": "^1.0.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.8.0"
   }
 }
