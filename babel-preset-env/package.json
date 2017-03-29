@@ -1,0 +1,112 @@
+{
+  "name": "babel-preset-env",
+  "version": "1.0.0",
+  "description": "",
+  "author": "akabeko",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "keywords": [
+    "babel-preset-env"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app.git"
+  },
+  "babel": {
+    "env": {
+      "default": {
+        "presets": [["env"]]
+      },
+      "chrome52": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "chrome": 52
+            }
+          }]
+        ]
+      },
+      "chrome52webpack_loose": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "chrome": 52
+            },
+            "modules": false,
+            "loose": true
+          }]
+        ]
+      },
+      "browserslist": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "chrome": 52,
+              "browsers": ["last 2 versions", "safari 7"]
+            }
+          }]
+        ]
+      },
+      "node_current": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "node": "current"
+            }
+          }]
+        ]
+      },
+      "debug_output": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "safari": 10
+            },
+            "modules": false,
+            "useBuiltIns": true,
+            "debug": true
+          }]
+        ]
+      },
+      "include_exclude_plugins_buildin": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "browsers": ["last 2 versions", "safari >= 7"]
+            },
+            "include": ["transform-es2015-arrow-functions", "es6.map"],
+            "exclude": ["transform-regenerator", "es6.set"]
+          }]
+        ]
+      },
+      "electron": {
+        "presets": [
+          ["env", {
+            "targets": {
+              "electron": 1.6
+            }
+          }]
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "start": "run-s build",
+    "build:default": "cross-env NODE_ENV=default babel ./src --out-dir ./dist/default",
+    "build:chrome52": "cross-env NODE_ENV=chrome52 babel ./src --out-dir ./dist/chrome52",
+    "build:chrome52webpack_loose": "cross-env NODE_ENV=chrome52webpack_loose babel ./src --out-dir ./dist/chrome52webpack_loose",
+    "build:browserslist": "cross-env NODE_ENV=browserslist babel ./src --out-dir ./dist/browserslist",
+    "build:node_current": "cross-env NODE_ENV=node_current babel ./src --out-dir ./dist/node_current",
+    "build:debug_output": "cross-env NODE_ENV=debug_output babel ./src --out-dir ./dist/debug_output",
+    "build:include_exclude_plugins_buildin": "cross-env NODE_ENV=include_exclude_plugins_buildin babel ./src --out-dir ./dist/include_exclude_plugins_buildin",
+    "build:electron": "cross-env NODE_ENV=electron babel ./src --out-dir ./dist/electron",
+    "build": "run-s build:*"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-env": "^1.2.2",
+    "cross-env": "^3.2.4",
+    "npm-run-all": "^4.0.2"
+  }
+}
