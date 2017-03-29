@@ -2,6 +2,11 @@
 
 Examples for web applications and tools.
 
+## babel-preset-env
+
+* [babel-preset-env](./babel-preset-env)
+* blog: [babel-preset-env を試す](http://akabeko.me/blog/2017/03/babel-preset-env)
+
 ## browserify
 
 * [browserify](./browserify)
