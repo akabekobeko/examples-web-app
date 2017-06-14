@@ -16,7 +16,7 @@
   },
   "babel": {
     "presets": [
-      "latest"
+      "env"
     ],
     "env": {
       "development": {
@@ -36,13 +36,14 @@
     "destination": "./esdoc",
     "test": {
       "type": "mocha",
-      "source": "./test"
+      "source": "./src/js"
     }
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-register test/**/*.test.js",
+    "test": "mocha --compilers js:babel-register src/js/**/*.test.js",
     "start": "npm run watch",
     "esdoc": "esdoc",
+    "eslint": "eslint ./src/js/",
     "build:css": "stylus -c --include-css ./src/stylus/App.styl -o ./src/assets/bundle.css -m --sourcemap-base ../stylus",
     "build:js": "browserify ./src/js/App.js -d | exorcist ./src/assets/bundle.js.map > ./src/assets/bundle.js",
     "build": "npm-run-all -p build:css build:js",
@@ -57,25 +58,25 @@
     "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
   },
   "dependencies": {
-    "normalize.css": "^5.0.0"
+    "normalize.css": "^7.0.0"
   },
   "devDependencies": {
-    "babel-preset-latest": "^6.16.0",
+    "babel-preset-env": "^1.5.2",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.18.0",
+    "babel-register": "^6.24.1",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.18.6",
-    "browserify": "^13.3.0",
+    "browser-sync": "^2.18.12",
+    "browserify": "^14.4.0",
     "cpx": "^1.5.0",
-    "cross-env": "^3.1.4",
+    "cross-env": "^5.0.1",
     "esdoc": "^0.5.2",
     "exorcist": "^0.4.0",
-    "mocha": "^3.2.0",
-    "npm-run-all": "^4.0.0",
-    "power-assert": "^1.4.2",
-    "rimraf": "^2.5.4",
+    "mocha": "^3.4.2",
+    "npm-run-all": "^4.0.2",
+    "power-assert": "^1.4.4",
+    "rimraf": "^2.6.1",
     "stylus": "^0.54.5",
-    "uglify-js": "^2.7.5",
-    "watchify": "^3.8.0"
+    "uglify-es": "^3.0.15",
+    "watchify": "^3.9.0"
   }
 }

@@ -6,4 +6,4 @@ esdoc/
 *.map
 bundle.*
 !.gitignore
-!.babelrc
+!.eslintrc
