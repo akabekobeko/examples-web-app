@@ -34,10 +34,16 @@
   "esdoc": {
     "source": "./src/js",
     "destination": "./esdoc",
-    "test": {
-      "type": "mocha",
-      "source": "./src/js"
-    }
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "test": {
+            "source": "./src/js"
+          }
+        }
+      }
+    ]
   },
   "scripts": {
     "test": "mocha --compilers js:babel-register src/js/**/*.test.js",
@@ -61,22 +67,29 @@
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.5.2",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.24.1",
+    "babel-register": "^6.26.0",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.18.13",
     "browserify": "^14.4.0",
     "cpx": "^1.5.0",
-    "cross-env": "^5.0.1",
-    "esdoc": "^0.5.2",
+    "cross-env": "^5.0.5",
+    "esdoc": "^1.0.1",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "exorcist": "^0.4.0",
-    "mocha": "^3.4.2",
-    "npm-run-all": "^4.0.2",
+    "mocha": "^3.5.0",
+    "npm-run-all": "^4.1.0",
     "power-assert": "^1.4.4",
     "rimraf": "^2.6.1",
     "stylus": "^0.54.5",
-    "uglify-es": "^3.0.15",
+    "uglify-es": "^3.0.28",
     "watchify": "^3.9.0"
   }
 }
