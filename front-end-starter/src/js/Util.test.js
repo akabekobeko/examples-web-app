@@ -1,5 +1,5 @@
 import assert from 'assert'
-import Util   from './Util.js'
+import Util from './Util.js'
 
 /** @test {Util} */
 describe('Util', () => {
