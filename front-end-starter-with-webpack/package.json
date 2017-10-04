@@ -1,0 +1,90 @@
+{
+  "name": "front-end-starter-with-webpack",
+  "version": "1.0.0",
+  "description": "This is a starter kit of the Web front-end development.",
+  "author": "akabeko",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "keywords": [
+    "web",
+    "frontend",
+    "starter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "env": {
+      "development": {
+        "presets": [
+          "power-assert"
+        ]
+      }
+    }
+  },
+  "esdoc": {
+    "source": "./src/js",
+    "destination": "./esdoc",
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "test": {
+            "source": "./src/js"
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-register src/js/**/*.test.js",
+    "start": "npm run watch",
+    "esdoc": "esdoc",
+    "eslint": "eslint ./src/js/",
+    "build:css": "stylus -c --include-css ./src/stylus/App.styl -o ./src/assets/bundle.css -m --sourcemap-base ../stylus",
+    "build:js": "webpack",
+    "build": "npm-run-all -p build:css build:js",
+    "watch:css": "stylus -c -w --include-css ./src/stylus/App.styl -o ./src/assets/bundle.css -m --sourcemap-base ../stylus",
+    "watch:js": "webpack --watch",
+    "watch:server": "webpack-dev-server --content-base ./src/assets",
+    "watch": "npm-run-all -p watch:*",
+    "release:css": "stylus -c --include-css ./src/stylus/App.styl -o ./dist/bundle.css",
+    "release:js": "cross-env NODE_ENV=production webpack",
+    "release:clean": "rimraf ./dist",
+    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.map)\" ./dist",
+    "release": "npm-run-all -s release:clean release:copy -p release:css release:js"
+  },
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "^6.26.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^5.0.5",
+    "esdoc": "^1.0.3",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "exorcist": "^1.0.0",
+    "mocha": "^4.0.0",
+    "npm-run-all": "^4.1.1",
+    "power-assert": "^1.4.4",
+    "rimraf": "^2.6.2",
+    "stylus": "^0.54.5",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  }
+}

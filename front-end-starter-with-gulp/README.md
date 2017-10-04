@@ -1,4 +1,4 @@
-# Web Front-end Starter Kit ( with gulp )
+# Web Front-end Starter Kit (with gulp)
 
 This is a starter kit of the Web front-end development.
 
@@ -12,7 +12,7 @@ This is a starter kit of the Web front-end development.
 
 ### Watch
 
-Runt the watch files, background complie ( JavaScript/CSS ) and launch the web server.
+Runt the watch files, background compile (JavaScript/CSS) and launch the web server.
 
 ```bash
 npm start
