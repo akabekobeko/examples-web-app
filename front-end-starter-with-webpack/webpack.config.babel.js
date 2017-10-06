@@ -20,7 +20,17 @@ export default {
       }
     ]
   },
+  devServer: {
+    contentBase: './src/assets',
+    hot: true,
+    historyApiFallback: true,
+    stats: {
+      colors: true
+    }
+  },
   plugins: PROD ? [
     new WebPack.optimize.UglifyJsPlugin()
-  ] : []
+  ] : [
+    new WebPack.HotModuleReplacementPlugin()
+  ]
 }

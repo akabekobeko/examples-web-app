@@ -51,7 +51,7 @@
     "build": "npm-run-all -p build:css build:js",
     "watch:css": "stylus -c -w --include-css ./src/stylus/App.styl -o ./src/assets/bundle.css -m --sourcemap-base ../stylus",
     "watch:js": "webpack --watch",
-    "watch:server": "webpack-dev-server --content-base ./src/assets",
+    "watch:server": "webpack-dev-server --open",
     "watch": "npm-run-all -p watch:*",
     "release:css": "stylus -c --include-css ./src/stylus/App.styl -o ./dist/bundle.css",
     "release:js": "cross-env NODE_ENV=production webpack",
