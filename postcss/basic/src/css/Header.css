@@ -1,0 +1,29 @@
+.header {
+  background-color: #e74c3c;
+
+  & ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  & li {
+    text-align: center;
+    line-height: 2.5em;
+    display: inline-block;
+
+    & a {
+      margin: 0;
+      width: 10em;
+      height: 2.5em;
+      color: #ffffff;
+      border-top: solid 2px #e74c3c;
+      box-sizing: border-box;
+      display: inline-block;
+      text-decoration: none;
+
+      &:hover {
+        border-top: solid 2px #f1c40f;
+      }
+    }
+  }
+}

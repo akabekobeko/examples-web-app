@@ -1,0 +1,9 @@
+node_modules/
+dist/
+esdoc/
+
+.*
+*.map
+bundle.*
+!.gitignore
+!.eslintrc
