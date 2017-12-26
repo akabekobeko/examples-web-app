@@ -1,0 +1,57 @@
+{
+  "name": "exsamples-postcss-css-modules",
+  "version": "1.0.0",
+  "description": "It is an example of basic usage.",
+  "author": "akabeko",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "keywords": [
+    "postcss",
+    "cssnext"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
+  "scripts": {
+    "start": "run-s watch",
+    "build:js": "webpack",
+    "build": "run-p build:*",
+    "watch:js": "webpack --watch",
+    "watch:server": "webpack-dev-server --open",
+    "watch": "run-p watch:*",
+    "release:js": "webpack --env.prod",
+    "release:clean": "rimraf ./dist",
+    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.map)\" ./dist",
+    "release": "npm-run-all -s release:clean release:copy release:js"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-minify-webpack-plugin": "^0.2.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "cpx": "^1.5.0",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "npm-run-all": "^4.1.2",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.9",
+    "rimraf": "^2.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}

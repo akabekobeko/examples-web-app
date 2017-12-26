@@ -1,0 +1,10 @@
+node_modules/
+dist/
+esdoc/
+
+.*
+*.map
+bundle.*
+package-lock.json
+!.gitignore
+!.eslintrc

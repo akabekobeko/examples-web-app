@@ -1,0 +1,38 @@
+{
+  "name": "exsamples-postcss-basic",
+  "version": "1.0.0",
+  "description": "It is an example of basic usage.",
+  "author": "akabeko",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "keywords": [
+    "postcss",
+    "cssnext"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akabekobeko/examples-web-app"
+  },
+  "scripts": {
+    "start": "run-s watch",
+    "build": "postcss ./src/css/App.css -o ./src/assets/bundle.css",
+    "watch:css": "postcss ./src/css/App.css -o ./src/assets/bundle.css -w",
+    "watch:server": "browser-sync start --server ./ --startPath src/assets/",
+    "watch": "run-p watch:*",
+    "release:css": "postcss ./src/css/App.css -o ./dist/bundle.css -e prod",
+    "release:clean": "rimraf ./dist",
+    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.map)\" ./dist",
+    "release": "npm-run-all -s release:clean release:copy -p release:css"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.19.0",
+    "cpx": "^1.5.0",
+    "cssnano": "^3.10.0",
+    "npm-run-all": "^4.1.2",
+    "postcss-cli": "^4.1.1",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "rimraf": "^2.6.2"
+  }
+}
