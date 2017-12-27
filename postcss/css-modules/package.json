@@ -1,7 +1,7 @@
 {
   "name": "exsamples-postcss-css-modules",
   "version": "1.0.0",
-  "description": "It is an example of basic usage.",
+  "description": "It is an example of css-modules usage.",
   "author": "akabeko",
   "license": "MIT",
   "private": true,

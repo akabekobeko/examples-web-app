@@ -31,7 +31,7 @@ export default (env) => {
                 modules: true,
                 importLoaders: 1,
                 sourceMap: !(PROD),
-                minimize: PROD
+                minimize: PROD ? { autoprefixer: false } : false
               }
             },
             'postcss-loader'
