@@ -1,36 +1,50 @@
 import WebPack from 'webpack'
+import MinifyPlugin from 'babel-minify-webpack-plugin'
 
-const PROD = process.env.NODE_ENV === 'production'
+export default (env) => {
+  const PROD = !!(env && env.prod)
 
-export default {
-  entry: './src/js/App.js',
-  output: {
-    path: PROD ? `${__dirname}/dist` : `${__dirname}/src/assets`,
-    filename: 'bundle.js'
-  },
-  devtool: PROD ? '' : 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
+  return {
+    entry: './src/js/App.js',
+    output: {
+      path: PROD ? `${__dirname}/dist` : `${__dirname}/src/assets`,
+      filename: 'bundle.js',
+      publicPath: '/'
+    },
+    devtool: PROD ? '' : 'source-map',
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader'
+          }
         }
-      }
+      ]
+    },
+    devServer: {
+      contentBase: './src/assets'
+    },
+    plugins: PROD ? [
+      new MinifyPlugin({
+        replace: {
+          'replacements': [
+            {
+              'identifierName': 'DEBUG',
+              'replacement': {
+                'type': 'numericLiteral',
+                'value': 0
+              }
+            }
+          ]
+        }
+      }, {}),
+      new WebPack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      })
+    ] : [
+      // development
     ]
-  },
-  devServer: {
-    contentBase: './src/assets',
-    hot: true,
-    historyApiFallback: true,
-    stats: {
-      colors: true
-    }
-  },
-  plugins: PROD ? [
-    new WebPack.optimize.UglifyJsPlugin()
-  ] : [
-    new WebPack.HotModuleReplacementPlugin()
-  ]
+  }
 }
