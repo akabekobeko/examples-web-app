@@ -1,0 +1,29 @@
+@import "Variables.scss";
+
+.content {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 1024px;
+  padding: 1em 0;
+
+  h1 {
+    font-size: 2.5em;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    font-weight: normal;
+    padding: 1em 0 1em .5em;
+    border-left: solid 2px $alizarin;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content {
+    margin: 0;
+    width: 100%;
+    padding: 1.5em;
+  }
+}
