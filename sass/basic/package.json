@@ -14,24 +14,24 @@
     "url": "https://github.com/akabekobeko/examples-web-app"
   },
   "scripts": {
-    "start": "run-s watch",
+    "start": "npm run watch",
     "build": "node-sass ./src/scss/App.scss ./src/assets/bundle.css -r --source-map true --output-style expanded",
     "watch:css": "node-sass ./src/scss/App.scss ./src/assets/bundle.css -w -r --source-map true --output-style expanded",
     "watch:server": "browser-sync start --server ./ --startPath src/assets/ --files *",
     "watch": "run-p watch:*",
     "release:css": "node-sass ./src/scss/App.scss ./dist/bundle.css -r --output-style compressed",
     "release:clean": "rimraf ./dist",
-    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.map)\" ./dist",
+    "release:copy": "cpx \"./src/assets/**/!(*.js|*.css|*.scss|*.map)\" ./dist",
     "release": "npm-run-all -s release:clean release:copy -p release:css"
   },
   "devDependencies": {
-    "browser-sync": "^2.19.0",
+    "browser-sync": "^2.23.6",
     "cpx": "^1.5.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.8.3",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "normalize.css": "^7.0.0"
+    "normalize.css": "^8.0.0"
   }
 }

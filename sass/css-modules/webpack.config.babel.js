@@ -1,9 +1,9 @@
 import WebPack from 'webpack'
 import MinifyPlugin from 'babel-minify-webpack-plugin'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-export default (env) => {
-  const PROD = !!(env && env.prod)
+export default (env, argv) => {
+  const PROD = !!(argv.mode && argv.mode === 'production')
 
   return {
     entry: './src/js/App.js',
@@ -24,11 +24,14 @@ export default (env) => {
         },
         {
           test: /\.scss$/,
-          use: ExtractTextPlugin.extract([
+          use: [
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
                 modules: true,
+                localIdentName: PROD ? '[hash:base64]' : '[name]-[local]-[hash:base64:5]',
+                url: false,
                 importLoaders: 1,
                 sourceMap: !(PROD),
                 minimize: PROD ? { autoprefixer: false } : false
@@ -41,7 +44,7 @@ export default (env) => {
                 sourceMap: !(PROD)
               }
             }
-          ])
+          ]
         }
       ]
     },
@@ -65,10 +68,10 @@ export default (env) => {
           ]
         }
       }, {}),
-      new ExtractTextPlugin({ filename: 'bundle.css' })
+      new MiniCssExtractPlugin({ filename: 'bundle.css' })
     ] : [
       // development
-      new ExtractTextPlugin({ filename: 'bundle.css' })
+      new MiniCssExtractPlugin({ filename: 'bundle.css' })
     ]
   }
 }
