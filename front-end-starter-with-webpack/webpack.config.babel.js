@@ -1,8 +1,8 @@
 import WebPack from 'webpack'
 import MinifyPlugin from 'babel-minify-webpack-plugin'
 
-export default (env) => {
-  const PROD = !!(env && env.prod)
+export default (env, argv) => {
+  const PROD = !!(argv.mode && argv.mode === 'production')
 
   return {
     entry: './src/js/App.js',
@@ -22,9 +22,6 @@ export default (env) => {
           }
         }
       ]
-    },
-    devServer: {
-      contentBase: './src/assets'
     },
     plugins: PROD ? [
       new MinifyPlugin({
