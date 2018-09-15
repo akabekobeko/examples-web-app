@@ -19,9 +19,9 @@ Examples for web applications and tools.
 * [es6-unit-test](./es6-unit-test)
 * blog: [ES6 コードをテストする](http://akabeko.me/blog/2015/05/es6-unit-test/)
 
-## front-end-starter
+## front-end-starter-browserify
 
-* [front-end-starter](./front-end-starter)
+* [front-end-starter-browserify](./front-end-starter-browserify)
 * blog:
  * [gulp なしの Web フロントエンド開発](http://akabeko.me/blog/2015/08/dev-web-front-end-without-gulp/)
  * [npm-run-all と concurrently を試す](http://akabeko.me/blog/2015/08/npm-run-all-and-concurrently/)
