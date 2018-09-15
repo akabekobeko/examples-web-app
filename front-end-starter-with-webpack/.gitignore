@@ -7,5 +7,5 @@ esdoc/
 bundle.*
 package-lock.json
 !.gitignore
-!.eslint.json
+!.eslintrc
 !.esdoc.json
