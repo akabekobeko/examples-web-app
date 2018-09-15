@@ -1,8 +1,10 @@
-import WebPack from 'webpack'
 import MinifyPlugin from 'babel-minify-webpack-plugin'
 
 export default (env, argv) => {
   const PROD = !!(argv.mode && argv.mode === 'production')
+  if (PROD) {
+    process.env.NODE_ENV = 'production'
+  }
 
   return {
     entry: './src/js/App.js',
@@ -36,10 +38,7 @@ export default (env, argv) => {
             }
           ]
         }
-      }, {}),
-      new WebPack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
-      })
+      }, {})
     ] : [
       // development
     ]

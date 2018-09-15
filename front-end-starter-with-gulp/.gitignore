@@ -5,5 +5,7 @@ esdoc/
 .*
 *.map
 bundle.*
+package-lock.json
 !.gitignore
-!.eslintrc
+!.eslint.json
+!.esdoc.json

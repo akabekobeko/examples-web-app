@@ -1,0 +1,14 @@
+{
+  "source": "./src/js",
+  "destination": "./esdoc",
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "test": {
+          "source": "./src/js"
+        }
+      }
+    }
+  ]
+}

@@ -17,7 +17,7 @@ const config = {
     dist: './dist/',
     assets: './src/assets/',
     js: './src/js/',
-    stylus: './src/stylus/'
+    scss: './src/scss/'
   },
   isWatchify: false,
   isRelease: false
@@ -27,18 +27,31 @@ const config = {
 // Transpiler
 /// /////////////////////////////////////////////////////////////////////////////
 
-// JavaScript ( ES6, React JSX )
+// JavaScript
 gulp.task('js', $.watchify((watchify) => {
   const time = process.hrtime()
   const minify = UglifyComposer(UglifyES, console)
+  const babelify = {
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            ie: 11
+          },
+          useBuiltIns: 'usage'
+        }
+      ]
+    ]
+  }
 
-  return gulp.src([ config.dir.js + 'App.js' ])
+  return gulp.src([config.dir.js + 'App.js'])
     .pipe($.plumber())
     .pipe(watchify({
       watch: config.isWatchify,
       basedir: './',
       debug: true,
-      transform: [ 'babelify' ]
+      transform: [['babelify', babelify]]
     }))
     .pipe(VinylBuffer())
     .pipe($.if(!(config.isRelease), $.sourcemaps.init({ loadMaps: true })))
@@ -52,12 +65,12 @@ gulp.task('js', $.watchify((watchify) => {
     })
 }))
 
-// CSS ( Stylus )
+// CSS
 gulp.task('css', () => {
-  return gulp.src([ config.dir.stylus + 'App.styl' ], { base: config.dir.root })
+  return gulp.src([config.dir.scss + 'App.scss'], { base: config.dir.root })
     .pipe($.plumber())
     .pipe($.if(!(config.isRelease), $.sourcemaps.init()))
-    .pipe($.stylus({ 'include css': true }))
+    .pipe($.sass({ outputStyle: 'expanded' }))
     .pipe($.rename('bundle.css'))
     .pipe($.if(config.isRelease, $.cleanCss()))
     .pipe($.if(!(config.isRelease), $.sourcemaps.write('./')))
@@ -84,12 +97,12 @@ gulp.task('server', () => {
 })
 
 // Watch files
-gulp.task('watch', [ 'watch:js', 'js', 'css', 'server' ], () => {
-  gulp.watch([ config.dir.stylus + '**/*.styl' ], [ 'css' ])
+gulp.task('watch', ['watch:js', 'js', 'css', 'server'], () => {
+  gulp.watch([config.dir.stylus + '**/*.styl'], ['css'])
 })
 
 // Default task
-gulp.task('default', [ 'watch' ])
+gulp.task('default', ['watch'])
 
 /// /////////////////////////////////////////////////////////////////////////////
 // Release
@@ -123,7 +136,7 @@ gulp.task('release', (done) => {
     'release:clean',
     'release:copy',
     'release:config',
-    [ 'js', 'css' ],
+    ['js', 'css'],
     done
   )
 })
