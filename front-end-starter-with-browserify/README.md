@@ -1,4 +1,4 @@
-# Web Front-end Starter Kit
+# Web Front-end Starter Kit (With Browserify)
 
 This is a starter kit of the Web front-end development.
 
